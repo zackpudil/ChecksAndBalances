@@ -1,0 +1,53 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- Start Content -->
+<section id="content" class="container add-top add-bottom">
+     <!-- Start Content Columns -->
+      <div class="columns twelve half-top half-bottom">
+        
+        <!-- Start Heading Intro Text -->
+        <h1 class="text-center intro-text">WE ARE CURRENTLY WORKING ON AN <span>AWESOME</span> SITE. <span>STAY TUNED.</span></h1>        
+         <!-- End Heading Intro Text -->
+
+        <!-- Start Timer Countdown -->
+        <div id="timer"></div>           
+        <!-- End Timer Countdown -->
+
+        <!-- Start Sub Heading Text -->
+        <div class="columns twelve first text-center">
+
+          <h3 class="text-center">Be The First To Know:</h3>
+        
+        </div>
+        <!-- End Sub Heading Text -->
+
+        <!-- Start Subscribe Form -->               
+        <fieldset class="columns nine cta-form">
+
+          <form action="mailsend.php" id="subscribe-form" method="post" name="subscribe-form">           
+            <input type="text" name="email" id="email" value="Enter Your Email For Updates"
+            class="cta-input email required" onfocus="if(this.value == 'Enter Your Email For Updates') 
+            { this.value = ''; }" onblur="if(this.value == '') { this.value = 'Enter Your Email For Updates'; }">                     
+            <input type="submit" id="submit" value="Get Notified" class="button medium">
+             <p class="text-center">We will never share your credentials to anyone.</p>
+         </form>           
+        </fieldset>         
+        <!-- End Subscribe Form --> 
+
+        <!-- Start Social Icons -->
+        <div class="columns twelve first text-center half top">
+          <a href="#" class="social-icons-mini color twitter tooltips" title="Follow Us On Twitter">Twitter</a>
+          <a href="#" class="social-icons-mini color facebook tooltips" title="Become Our Facebook Fan">Facebook</a>
+          <a href="#" class="social-icons-mini color dribbble tooltips" title="Follow Us On Dribbble">Dribbble</a>
+          <a href="#" class="social-icons-mini color linkedin tooltips"  title="Follow Us On Linked In">LinkedIn</a>
+          <a href="#" class="social-icons-mini color rss tooltips" title="Subscribe to Our Feed">RSS</a>
+        </div>
+        <!-- End Social Icons -->
+        
+      </div>
+      <!-- End Content Columns -->
+</section>
+<!-- End Content -->

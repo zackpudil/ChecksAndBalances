@@ -1,0 +1,219 @@
+/* Blue Color - #cf4e49
+=================================================== */
+.flex-control-paging li a.flex-active, .flex2-control-paging li a.flex2-active {
+  background: #49abcf;
+  border: 1px solid #3091b5;
+}
+
+.flex-control-paging li a:hover, .flex2-control-paging li a:hover {
+  border: 1px solid #3091b5;
+  background: #25718d;
+}
+
+.camera_prevThumbs, .camera_nextThumbs, .camera_prev, .camera_next, .camera_commands, .camera_thumbs_cont {
+  background: #49abcf;
+}
+
+.camera_wrap .camera_pag .camera_pag_ul li {
+  background: #49abcf;
+}
+
+#main-nav ul li > a:hover, #main-nav ul li:hover > a, #main-nav ul li ul, .social-icons, .camera_caption > div h2, .camera_prevThumbs, .camera_nextThumbs, .camera_prev, .camera_next, .camera_commands, .camera_thumbs_cont, .features-2 .columns img, .widget-slide-direction-nav a.widget-slide-prev:hover, a.widget-slide-next:hover, .percentage span.perc-overlay {
+  background-color: #49abcf;
+}
+
+.header-alt2 #main-nav li > a.active, .header-alt2 #main-nav li > a:hover, .header-alt2 #main-nav ul ul li:hover > a, .header-alt #main-nav.nav2 ul ul li:hover > a, .header-alt2 #main-nav.nav2 li.sfHover > a, .da-slide h2 {
+  color: #49abcf;
+}
+
+.header-alt2 .nav2, .header-alt2 #main-nav ul li:hover ul, .header-alt2 #main-nav ul li ul {
+  -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25), inset 0 2px #49abcf;
+  -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25), inset 0 2px #49abcf;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25), inset 0 2px #49abcf;
+}
+
+.container a {
+  color: #49abcf;
+}
+
+.widget a:hover, .accordion-head:hover, .accordion-head.ui-accordion-header-active, .breadcrumbs a,
+.portfolio-title a, .pagination a, .works-title a, .blog-content a, .post-title a, a.post-more, .blog-content a,
+.post-wrapper a {
+  color: #49abcf;
+}
+
+.breadcrumbs a:hover, .portfolio-title a:hover, .pagination a:hover, .works-title a:hover,
+.blog-content a:hover, .post-title a:hover, .post-meta a:hover, a.post-more:hover, .post-wrapper a:hover, .container a:hover {
+  color: #2a2a2a;
+}
+
+.widget-tags a:hover {
+  border: 1px solid #3091b5;
+  background: #49abcf url(Images/arrows2.png) no-repeat left center;
+}
+
+.works-direction-nav a.works-prev:hover, a.works-next:hover, .blog-direction-nav a.blog-prev:hover, a.blog-next:hover,
+.works-direction-nav a.works2-prev:hover, a.works2-next:hover, .blog2-direction-nav a.blog2-prev:hover, a.blog2-next:hover,
+.works-direction-nav a.works3-prev:hover, a.works3-next:hover, .logo-direction-nav a.logo-prev:hover, .logo-direction-nav a.logo-next:hover {
+  background-color: #49abcf;
+}
+
+.blog-item:hover .blog-content {
+  border-bottom: 1px solid #49abcf;
+}
+
+.cta-box {
+  background-color: #49abcf;
+}
+
+.ui-accordion-header-active .ui-accordion-header-icon {
+  background-color: #49abcf;
+}
+
+.tabs-head li.ui-tabs-active {
+  border-top: 2px solid #49abcf;
+}
+
+.tabs-head li.ui-tabs-active a, .tabs-head li a:hover {
+  color: #49abcf;
+}
+
+.testimonial-direction-nav a.testimonial-prev:hover, a.testimonial-next:hover {
+  background-color: #49abcf;
+}
+
+.testimonial .testimonial-quote {
+  border-top: 2px solid #49abcf;
+}
+
+.testimonial .testimonial-author .photo {
+  border: 3px solid #49abcf;
+}
+
+.button,
+button,
+input[type="submit"],
+input[type="reset"],
+input[type="button"] {
+  background-color: #49abcf;
+  border: 1px solid #3091b5;
+}
+
+.button:hover, .button.solid:hover,
+button:hover, button.solid :hover,
+input[type="submit"]:hover, input[type="submit"].solid:hover,
+input[type="reset"]:hover, input[type="reset"].solid:hover,
+input[type="button"]:hover, .button:active,
+button:active,
+input[type="submit"]:active,
+input[type="reset"]:active,
+input[type="button"]:active,
+.button.solid:active,
+button.solid:active,
+input[type="submit"].solid:active,
+input[type="reset"].solid:active,
+input[type="button"].solid:active {
+  background: #3091b5;
+  border: 1px solid #25718d;
+}
+
+.button.solid,
+button.solid,
+input[type="submit"].solid,
+input[type="reset"].solid,
+input[type="button"].solid {
+  background: #49abcf;
+}
+
+.dropcap1.color {
+  color: #49abcf;
+}
+
+.dropcap2.color, .dropcap3.color {
+  background-color: #49abcf;
+}
+
+.highlight {
+  background: #49abcf;
+}
+
+.section-title h1 span {
+  color: #49abcf;
+}
+
+pre span.color, code span.color {
+  color: #49abcf;
+}
+
+.columns:hover .post-wrapper {
+  border-bottom: 1px solid #49abcf;
+}
+
+.post-date {
+  background: #49abcf;
+}
+
+.skill-html {
+  background: #49abcf;
+}
+
+.skill-css {
+  background: #49abcf;
+}
+
+.skill-jquery {
+  background: #49abcf;
+}
+
+.skill-php-mysql {
+  background: #49abcf;
+}
+
+.portfolio-items .columns:hover .portfolio-title {
+  border-bottom: 1px solid #49abcf;
+}
+
+.project-slider-direction-nav li a:hover, .post-slider-direction-nav li a:hover {
+  background-color: #49abcf;
+}
+
+.percentage span.overlay, .overlay, .works-icon {
+  background-color: #49abcf;
+}
+
+.flex-caption, .flex-active.slide .flex-caption, .works-overlay, .portfolio-overlay, .blog-overlay {
+  background: #49abcf;
+  background: rgba(73, 171, 207, 0.75);
+}
+
+.header-wrapper.header-alt2.blue-grad, .features-slider .columns:hover .features-description {
+  border-bottom: 2px solid #49abcf;
+}
+
+.header-wrapper.header-alt2.blue-grad #header, .header-wrapper.blue-grad #header{
+  background: #49abcf;
+  *zoom: 1;
+  filter: progid:DXImageTransform.Microsoft.gradient(gradientType=0, startColorstr='#FF86C7DF', endColorstr='#FF49ABCF');
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #86c7df), color-stop(100%, #49abcf));
+  background-image: -webkit-linear-gradient(top, #86c7df 0%, #49abcf 100%);
+  background-image: -moz-linear-gradient(top, #86c7df 0%, #49abcf 100%);
+  background-image: -o-linear-gradient(top, #86c7df 0%, #49abcf 100%);
+  background-image: linear-gradient(top, #86c7df 0%, #49abcf 100%);
+}
+
+.slide-content {
+  border-left: 2px solid #3091b5;
+}
+
+.slide-content.content-right {
+  border-right: 2px solid #3091b5;
+}
+
+.footer-widgets a {
+  color: #ffffff;
+}
+
+.footer-widgets a:hover {
+  color: #49abcf;
+  border-bottom: 1px dotted #49abcf;
+}

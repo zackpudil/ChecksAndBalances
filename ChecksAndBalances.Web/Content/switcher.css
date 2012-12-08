@@ -1,0 +1,136 @@
+.skin-switcher {
+  position: fixed;
+  top: 190px;
+  left: 0px;
+  border-top: 2px solid #818181;
+  z-index: 99999;
+  -webkit-box-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+  box-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+}
+.skin-switcher hr {
+  margin: 10px 0;
+}
+a#switcher-toggle {
+  position: absolute;
+  top: -2px;
+  right: -42px;
+  width: 32px;
+  height: 32px;
+  padding: 5px;
+  border-top: 2px solid #818181;
+  display: block;
+  background: #7a7a7a url(Images/switcher-icon.png) no-repeat center center;
+  -webkit-box-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+  box-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+}
+.switcher-wrap {
+  position: relative;
+  width: 115px;
+  padding: 10px;
+  display: block;
+  background: #fff;
+  float: left;
+}
+.switcher-wrap div {
+  line-height: 1;
+  float: left;
+}
+.switcher-wrap h3 {
+  font-size: 18px;
+  line-height: 1;  
+  padding: 2px 0px 0px;
+  margin: 0 0 10px; 
+  text-transform: uppercase;
+}
+.switcher-wrap h4 {
+  margin-top: 0;
+  margin-bottom: 10px;
+  font-size: 16px
+}
+.switcher-color, .switcher-layout, .switcher-bg {
+  padding:0px;
+  margin-bottom: 10px;
+}
+.switcher-color a, .switcher-bg a{
+  display: inline;
+  width: 20px;
+  height: 20px;
+  float: left;
+  margin: 0px 0px 1px 1px; 
+}
+.switcher-color a#blue {
+  background-color: #49abcf;
+}
+.switcher-color a#brown {
+  background-color: #b28d6e;
+}
+.switcher-color a#dark-green {
+  background-color: #26865b;
+}
+.switcher-color a#dark-blue {
+  background-color: #3264af;
+}
+.switcher-color a#orange {
+  background-color: #f37356;
+}
+.switcher-color a#green {
+  background-color: #649e34;
+}
+.switcher-color a#red {
+  background-color: #cf4e49;
+}
+.switcher-color a#purple {
+  background-color: #7981bf;
+}
+.switcher-color a:hover, .switcher-bg a:hover {
+  cursor: pointer;
+}
+.switcher-bg a {
+  background: #ccc;
+}
+.switcher-bg a.wood {
+  background: url(Images/patterns/wood.jpg) repeat;
+}
+.switcher-bg a.cartographer {
+  background: url(Images/patterns/cartographer.png) repeat;
+}
+.switcher-bg a.pattern01 {
+  background: url(Images/patterns/pattern01.jpg) repeat;
+}
+.switcher-bg a.pattern02 {
+  background: url(Images/patterns/pattern02.jpg) repeat;
+}
+.switcher-bg a.pattern03 {
+  background: url(Images/patterns/pattern03.jpg) repeat;
+}
+.switcher-bg a.pattern04 {
+  background: url(Images/patterns/pattern04.jpg) repeat;  
+}
+.switcher-bg a.pattern05 {
+  background: url(Images/patterns/pattern05.jpg) repeat;
+}
+.switcher-bg a.px {
+  background: url(Images/patterns/px.png) repeat;
+}
+.switcher-bg a.pattern06 {
+  background: url(Images/patterns/pattern06.png) repeat;
+}
+.switcher-bg a.noise {
+  background: url(Images/patterns/bg/noise.png) repeat;
+}
+.switcher-bg a.background1 {
+  background: url(Images/patterns/background1.jpg) repeat;
+}
+.switcher-bg a.background2 {
+  background: url(Images/patterns/background2.jpg) repeat;
+}
+.switcher-layout a {
+  padding: 2px 5px;
+  font-size: 12px;
+  display: inline;
+  border: 1px solid white;
+}
+.switcher-layout a.active, .switcher-layout a:hover {  
+  border: 1px dotted #ccc;
+  color: #494949;
+}
