@@ -207,9 +207,10 @@ body.background2 {
   margin-top: 5px;
   font-size: 0;
 }
-/*.columns.twelve #logo {
+
+.columns.twelve #logo {
   text-align: center;
-}*/
+}
 
 .header-alt2 #logo a {
   background: url(Images/logo-3.png) no-repeat;
