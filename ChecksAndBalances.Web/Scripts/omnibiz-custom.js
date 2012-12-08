@@ -983,12 +983,12 @@ jQuery(document).ready(function($){
   // 20 Tweetable
   if ($('#tweets').length && jQuery()) {
     $('#tweets').tweetable({
-      limit: 2,                       // Number of tweets to show
-      username: 'envato',             // @username tweets to display
+      limit: 10,                       // Number of tweets to show
+      username: 'philemn',             // @username tweets to display
       time: true,                     // Display date
-      rotate: false,                  // Rotate tweets
+      rotate: true,                  // Rotate tweets
       speed: 5000,                    // Speed of rotation
-      replies: true,                  // Filter out @replys
+      replies: false,                  // Filter out @replys
       position: 'append',             // Append position
       failed: "No tweets available",  // Twitter stream unavailable text
       html5: true,                    // HTML5 Support

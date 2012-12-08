@@ -198,22 +198,19 @@ body.background2 {
 #logo {
   font-size: 0px;
   line-height: 0;
-  text-transform: uppercase; 
+  text-transform: uppercase;
 }
 #logo a {
-  background: url(Images/logo.png) no-repeat;
   width: 162px;
   height: 30px;
   display: inline-block;
   margin-top: 5px;
   font-size: 0;
 }
-.columns.twelve #logo {
+/*.columns.twelve #logo {
   text-align: center;
-}
-.header-wrapper.blue-grad #logo a{
-  background: url(Images/logo-white.png) no-repeat;
-}
+}*/
+
 .header-alt2 #logo a {
   background: url(Images/logo-3.png) no-repeat;
   text-indent: -99999px;
@@ -221,15 +218,7 @@ body.background2 {
   height: 30px;
   display: block;
   margin-bottom: 10px;
-}
-.soon #logo {
-  text-align: center;
-}
-.soon #logo a {
-  margin: 10px auto;
-}
-.soon #footer {
-  padding-top: 0;
+  font-size: 12px;
 }
 
 /* Navigation ---------------------------------- */
