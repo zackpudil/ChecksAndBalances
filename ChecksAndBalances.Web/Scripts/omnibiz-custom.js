@@ -939,7 +939,7 @@ jQuery(document).ready(function($){
         /* Content that will be shown within the info window for this marker. If empty no info window will be shown when the user clicks the marker.  */   
       }],
       icon: {                       //Subset of properties for defining a custom marker image for all markers.
-        image: 'img/gmap_pin.png',  //Full path to a image that indicates the marker on the map.
+        image: '/Content/Images/gmap_pin.png',  //Full path to a image that indicates the marker on the map.
         iconsize: [44, 54],         //A simple array of integer values for width and height valid for "image".
         iconanchor: [22, 54],       //The pixel coordinate relative to the top left corner of the icon image at which this icon is anchored to the map.
         infowindowanchor: [22, 0]   //The pixel coordinate relative to the top left corner of the icon image at which the info window is anchored to this icon.

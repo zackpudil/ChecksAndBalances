@@ -3165,7 +3165,7 @@ a.post-format {
 /* =============================================== */
 /* 10 Contact Page
 ================================================== */
-#map-canvas {
+.little-map {
   position: absolute;
   top: 0; 
   height: 100%;
@@ -3173,7 +3173,7 @@ a.post-format {
   margin-left: -35px;
   margin-right: -35px;  
 }
-#map-canvas2 {
+.big-map {
   position: relative;
   min-height: 320px;
 }
