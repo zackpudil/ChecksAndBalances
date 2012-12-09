@@ -14,6 +14,12 @@ namespace ChecksAndBalances.Web
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
+                name: "State",
+                url: "{controller}/{state}/{action}/{id}",
+                defaults: new { controller = "PlayersPage", action = "Index", id = UrlParameter.Optional }
+            );
+
+            routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }

@@ -5,8 +5,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChecksAndBalances.Web", "Ch
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChecksAndBalances.Data", "ChecksAndBalances.Data\ChecksAndBalances.Data.csproj", "{FA99AF7B-E7CC-47F6-9D1D-6CE34F02465F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChecksAndBalances.Service", "ChecksAndBalances.Service\ChecksAndBalances.Service.csproj", "{00188E38-5733-4F26-922A-95E6245B4C3C}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{22CDDAA7-B932-4115-B923-290691DE34E1}"
 	ProjectSection(SolutionItems) = preProject
 		.nuget\NuGet.Config = .nuget\NuGet.Config
@@ -28,10 +26,6 @@ Global
 		{FA99AF7B-E7CC-47F6-9D1D-6CE34F02465F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FA99AF7B-E7CC-47F6-9D1D-6CE34F02465F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FA99AF7B-E7CC-47F6-9D1D-6CE34F02465F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{00188E38-5733-4F26-922A-95E6245B4C3C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{00188E38-5733-4F26-922A-95E6245B4C3C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{00188E38-5733-4F26-922A-95E6245B4C3C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{00188E38-5733-4F26-922A-95E6245B4C3C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

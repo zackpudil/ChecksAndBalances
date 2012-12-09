@@ -54,7 +54,6 @@ namespace ChecksAndBalances.Web.App_Start
         private static void RegisterServices(IKernel kernel)
         {
             ChecksAndBalances.Data.Infrastructure.AppStart.RegisterAssemblies(kernel);
-            ChecksAndBalances.Service.Infrastructure.AppStart.RegisterAssemblies(kernel);
         }        
     }
 }
