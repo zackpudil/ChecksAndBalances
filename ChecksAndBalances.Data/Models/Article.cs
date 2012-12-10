@@ -26,16 +26,9 @@ namespace ChecksAndBalances.Data.Models
         public DateTime DatePublished { get; set; }
 
         public int Views { get; set; }
+        public bool SpotLighted { get; set; }
 
-        public ICollection<int> States { get; set; }
-        public IEnumerable<State> AvaliableStates
-        {
-            get
-            {
-                return States.Cast<State>();
-            }
-        }
-
+        public ICollection<ArticleState> States { get; set; }
         public ICollection<CategoryTag> Tags { get; set; }
         public ICollection<Comment> Comments { get; set; }
     }

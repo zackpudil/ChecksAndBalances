@@ -80,6 +80,6 @@
     <!-- End Main Content -->
 
     <!-- Start Sidebar -->
-    @Html.Action("SideBar", new { @state = Model.CurrentState })
+    @Html.Action("SideBar", "Home", new { @state = Model.CurrentState })
     <!-- End Sidebar -->
 </section>

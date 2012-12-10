@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using Ninject;
 using Ninject.Infrastructure;
 using Ninject.Extensions.Conventions;
+using System.Data.Entity;
+using ChecksAndBalances.Data.Storage.Context;
 
 namespace ChecksAndBalances.Data.Infrastructure
 {
@@ -27,7 +29,7 @@ namespace ChecksAndBalances.Data.Infrastructure
 
         public static void RegisterDatabaseInitializer()
         {
-            //used for active development. Deletes database on every model change!
+            Database.SetInitializer<ChecksAndBalancesContext>(new ChecksAndBalancesInitializer());
         }
     }
 }

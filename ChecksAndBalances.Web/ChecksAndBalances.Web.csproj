@@ -428,7 +428,7 @@
     <Content Include="Views\PlayersPage\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\PlayersPage\SideBar.cshtml" />
+    <Content Include="Views\Shared\SideBar.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
