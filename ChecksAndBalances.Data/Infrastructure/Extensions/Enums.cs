@@ -6,7 +6,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ChecksAndBalances.Data.Infrastructure.Extensions
+namespace ChecksAndBalances.Extensions
 {
     public static class Enums
     {

@@ -11,5 +11,7 @@ namespace ChecksAndBalances.Data.Storage.Context
     public class ChecksAndBalancesContext : DbContext
     {
         public DbSet<Article> Articles { get; set; }
+        public DbSet<CategoryTag> CategoryTags { get; set; }
+        public DbSet<Comment> Comments { get; set; }
     }
 }

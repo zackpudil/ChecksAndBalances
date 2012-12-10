@@ -1,0 +1,134 @@
+﻿@model ChecksAndBalances.Web.Models.SideBarViewModel
+@using ChecksAndBalances.Extensions;
+<div id="secondary" class="columns one-fourth">
+
+    <div class="widget">
+
+        <h4>Spotlight Articles</h4>
+        <div class="widget-list">
+            <ul class="styled-list arrow-6">
+                @foreach(var article in Model.SpotLightArticles)
+                {
+                    <li>@Html.ActionLink(article, "Get", "Article", new { @state = Model.CurrentState, @resourceName = article.ToUrlSafeString() }, new { })</li>
+                }
+            </ul>
+        </div>
+        <!-- End Widget List -->
+
+    </div>
+
+    <div class="widget">
+
+        <div class="widget-tabs">
+
+            <ul class="tabs-head">
+                <li>
+                    <h4><a href="#tabs-recent">Recent</a></h4>
+                </li>
+                <li>
+                    <h4><a href="#tabs-popular">Popular</a></h4>
+                </li>
+                <li>
+                    <h4><a href="#tabs-comments"><i class="icon-comments-2"></i></a></h4>
+                </li>
+            </ul>
+
+            <div class="tabs-wrapper">
+                <div id="tabs-recent" class="tabs-content">
+                    <ul class="post-small">
+                        @foreach (var article in Model.RecentArticles)
+                        {
+                            <li>
+                                <a href="@Url.Action("Get", "Article", new { @state = Model.CurrentState, @resourceName = article.Title.ToUrlSafeString() })">
+                                    <img src="@article.ImageUrl" />
+                                </a>
+                                <p>@Html.ActionLink(article.Title, "Get", "Article", new { @state = Model.CurrentState, @resourceName = article.Title.ToUrlSafeString() }, new { })</p>
+                                <span>@article.DatePublished.ToShortDateString()</span>
+                            </li>
+                        }
+                    </ul>
+                </div>
+
+                <div id="tabs-popular">
+                    <ul class="post-small">
+                        @foreach (var article in Model.PopularArticles)
+                        {
+                            <li>
+                                <a href="@Url.Action("Get", "Article", new { @state=Model.CurrentState, @resourceName = article.Title.ToUrlSafeString() })">
+                                    <img src="@article.ImageUrl" />
+                                </a>
+                                <p>@Html.ActionLink(article.Title, "Get", "Article", new { @state = Model.CurrentState, @resourceName = article.Title.ToUrlSafeString() }, new { })</p>
+                                <span>@article.DatePublished.ToShortDateString()</span>
+                            </li>
+                        }
+                    </ul>
+                </div>
+
+                <div id="tabs-comments">
+                    <ul class="post-small">
+                        @foreach (var article in Model.RecentlyCommentArticles)
+                        {
+                            <li>
+                                <a href="@Url.Action("Get", "Article", new { @state=Model.CurrentState, @resourceName = article.Title.ToUrlSafeString() })">
+                                    <img src="@article.ImageUrl" />
+                                </a>
+                                <p>@Html.ActionLink(article.Title, "Get", "Article", new { @state = Model.CurrentState, @resourceName = article.Title.ToUrlSafeString() }, new { })</p>
+                                <span>@article.DatePublished.ToShortDateString()</span>
+                            </li>
+                        }
+                    </ul>
+                </div>
+
+            </div>
+
+        </div>
+        <!-- End Widget Tabs -->
+
+    </div>
+
+    <div class="widget">
+
+        <div class="widget-text">
+            <h4>Ad Space</h4>
+            <div class="widget-content">
+                Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
+            </div>
+        </div>
+        <!-- End Widget Text -->
+
+    </div>
+
+    <div class="widget">
+
+        <div class="widget-slide">
+            <h4>Latest Photo</h4>
+            <div class="widget-content">
+                <ul class="slides">
+                    @foreach(var image in Model.LatestPhotos)
+                    {
+                        <li><img src="@image" /></li>
+                    }
+                </ul>
+            </div>
+        </div>
+        <!-- End Widget Slide -->
+
+    </div>
+
+    <div class="widget">
+
+        <div class="widget-tags">
+            <h4>Popular Tags</h4>
+            <div class="widget-content">
+                @foreach (var category in Model.PopularTags)
+                {
+                    @Html.ActionLink(category, "Category", "Article", new { @state = Model.CurrentState, @resourceName = category.ToUrlSafeString() }, new { })
+                }
+            </div>
+
+        </div>
+        <!-- End Widget Tags -->
+
+    </div>
+
+</div>

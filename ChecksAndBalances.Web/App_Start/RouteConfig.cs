@@ -15,8 +15,8 @@ namespace ChecksAndBalances.Web
 
             routes.MapRoute(
                 name: "State",
-                url: "{controller}/{state}/{action}/{id}",
-                defaults: new { controller = "PlayersPage", action = "Index", id = UrlParameter.Optional }
+                url: "{controller}/{state}/{action}/{resource}/{id}",
+                defaults: new { controller = "PlayersPage", action = "Index", resource = UrlParameter.Optional, id = UrlParameter.Optional }
             );
 
             routes.MapRoute(

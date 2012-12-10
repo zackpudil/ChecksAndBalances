@@ -1,13 +1,14 @@
 ﻿@{
     ViewBag.Title = "Checks And Balances | Players Page";
+    ViewBag.CurrentState = Model.CurrentState;
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 @model ChecksAndBalances.Web.Models.PlayersPageViewModel
-@using ChecksAndBalances.Data.Infrastructure.Extensions
+@using ChecksAndBalances.Extensions
 
 @section sectionTitle {
-     <section class="section-title">
+    <section class="section-title">
         <div class="container">
             <h1><span>Players Page</span> for @Model.CurrentState.ToDescription()</h1>
         </div>
@@ -15,268 +16,70 @@
 }
 
 <section id="content" class="container">
-     <!-- Start Main Content -->
-      <div id="primary" class="columns three-fourths first">
+    <!-- Start Main Content -->
+    <div id="primary" class="columns three-fourths first">
+        @if (!Model.Articles.Any())
+        {
+            <div class="post-entry">
+                <div class="post-head columns nine first">
+                    <h4 class="post-title columns eight">
+                        No Articles Yet.
+                    </h4>
+                </div>
+
+                <ul class="post-meta">
+                    <li>Comming soon</li>
+                </ul>
+
+                <div class="post-media2">
+                    <img src="~/Content/Images/icons/support.png" />
+                </div>
+
+                <div class="post-content">
+                    Be the first to know when new articles are posted.  Follow us on twitter.
+                </div>
+            </div>
+        }
+        @foreach (var article in Model.Articles)
+        {
+            <div class="post-entry">
+                <div class="post-head columns nine first">
+                    <h4 class="post-title columns eight">
+                        @Html.ActionLink(article.Title, "Get", "Article", new { @state = Model.CurrentState, @resource = article.Title.ToUrlSafeString() }, new { })
+                    </h4>
+                </div>
+                <ul class="post-meta">
+                    <li class="date">
+                        @Html.ActionLink(article.DatePublished.ToShortDateString(), "Date", "Article", new { @state = Model.CurrentState, @resource = article.DatePublished.ToShortDateString() }, new { })
+                    </li>
+                    <li class="author">@article.Authors</li>
+                    <li class="cat">
+                        @foreach (var cat in article.Tags)
+                        {
+                            @Html.ActionLink(cat.Name, "Category", "Article", new { @state = Model.CurrentState, @resource = cat.Name.ToUrlSafeString() }, new { })
+                        }
+                    </li>
+                    <li class="comments">@article.Comments.Count() Comments</li>
+                </ul>
+
+                <div class="post-media2">
+                    <img src="@article.ImageUrl" />
+                </div>
+
+                <div class="post-content">
+                    @article.Description
+                </div>
+
+                @Html.ActionLink("READ MORE...", "Get", "Article", new { @state = Model.CurrentState, @resource = article.Title.ToUrlSafeString() }, new { @class = "post-more" })
+            </div>
+            
+            <hr class="devider1" />
+        }
         
-        <div class="post-entry">
-
-          <div class="post-head columns nine first">
-
-            <h4 class="post-title columns eight">
-              <a href="single-blog.html">A title of a blog article Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</a>
-            </h4> 
-
-          </div>    
-
-          <ul class="post-meta">
-            <li class="date"><a href="#">19/09/2012</a></li>
-            <li class="author">By <a href="#">Vesper Creative</a></li>
-            <li class="cat"><a href="#">News</a>, <a href="#">Design</a></li>
-            <li class="comments"><a href="#">99 Comments</a></li>
-          </ul>
-
-          <div class="post-media2">
-            <img src="img/blog/blog-9.jpg" alt="Blog Image">
-          </div>      
-
-          <div class="post-content">
-            Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.
-
-          <a href="#" class="post-more">READ MORE...</a>  
-
-        </div>
-
-        </div>
-
-        <hr class="divider1">
-
-        <div class="post-entry">
-
-          <div class="post-head columns nine first">
-
-            <h4 class="post-title columns eight">
-              <a href="single-blog.html">A title of a blog article Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</a>
-            </h4> 
-
-          </div>    
-
-          <ul class="post-meta">
-            <li class="date"><a href="#">19/09/2012</a></li>
-            <li class="author">By <a href="#">Vesper Creative</a></li>
-            <li class="cat"><a href="#">News</a>, <a href="#">Design</a></li>
-            <li class="comments"><a href="#">99 Comments</a></li>
-          </ul>
-
-          <div class="post-media2">
-            <img src="img/blog/blog-10.jpg" alt="Blog Image">
-          </div>      
-
-          <div class="post-content">
-            Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.
-
-          <a href="#" class="post-more">READ MORE...</a>  
-
-        </div>
-       
-        </div>
-
-        <hr class="divider1">
-
-        <div class="post-entry">
-
-          <div class="post-head columns nine first">
-
-            <h4 class="post-title columns eight">
-              <a href="single-blog.html">A title of a blog article Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</a>
-            </h4> 
-
-          </div>    
-
-          <ul class="post-meta">
-            <li class="date"><a href="#">19/09/2012</a></li>
-            <li class="author">By <a href="#">Vesper Creative</a></li>
-            <li class="cat"><a href="#">News</a>, <a href="#">Design</a></li>
-            <li class="comments"><a href="#">99 Comments</a></li>
-          </ul>
-
-          <div class="post-media2">
-            <img src="img/blog/blog-11.jpg" alt="Blog Image">
-          </div>      
-
-          <div class="post-content">
-            Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.
-
-          <a href="#" class="post-more">READ MORE...</a>  
-
-        </div>
-
-        </div>
-
-        <hr class="divider1">
-
-        <div class="pagination">
-          <ul>
-            <li class="disabled"><a href="#">Prev</a></li>
-            <li class="active"><a href="#">1</a></li>
-            <li><a href="#">2</a></li>
-            <li><a href="#">3</a></li>
-            <li><a href="#">4</a></li>
-            <li><a href="#">Next</a></li>
-          </ul>
-        </div>
-
-      </div>
-      <!-- End Main Content -->
-
-      <!-- Start Sidebar -->
-      <div id="secondary" class="columns one-fourth">
-
-        <div class="widget">
-
-          <h4>Widget List</h4>
-          <div class="widget-list">
-            <ul class="styled-list arrow-6">
-              <li><a href="single-blog.html">Penatibus et magnis dis dolor sit amet consectetuer</a></li>
-              <li><a href="single-blog.html">Lorem ipsum dolor sit amet</a></li>
-              <li><a href="single-blog.html">Aenean commodo ligula eget</a></li>
-              <li><a href="single-blog.html">Aenean massa cum sociis</a></li>
-              <li><a href="single-blog.html">Penatibus et magnis dis parturient</a></li>
-              <li><a href="single-blog.html">Nascetur ridiculus mus dolor sit</a></li>
-            </ul> 
-          </div><!-- End Widget List -->
-
-        </div>
-
-        <div class="widget">
-
-          <div class="widget-tabs">
-
-            <ul class="tabs-head">
-                <li><h4><a href="#tabs-recent">Recent</a></h4></li>
-                <li><h4><a href="#tabs-popular">Popular</a></h4></li>
-                <li><h4><a href="#tabs-comments"><i class="icon-comments-2"></i></a></h4></li>
-            </ul>
-
-            <div class="tabs-wrapper">
-
-              <div id="tabs-recent" class="tabs-content">
-                  <ul class="post-small">
-                    <li>
-                      <a href="#"><img src="img/photos/photo-6.jpg" alt="Blog Image"></a>
-                      <p><a href="#">Morbi tincidunt, dui sit amet facilisis</a></p>
-                      <span>20 November 2012</span>
-                    </li>
-
-                    <li>
-                      <a href="#"><img src="img/photos/photo-7.jpg" alt="Blog Image"></a>
-                      <p><a href="#">Morbi tincidunt, dui sit amet facilisis</a></p>
-                      <span>20 November 2012</span>
-                    </li>
-
-                    <li>
-                      <a href="#"><img src="img/photos/photo-8.jpg" alt="Blog Image"></a>
-                      <p><a href="#">Morbi tincidunt, dui sit amet facilisis</a></p>
-                      <span>20 November 2012</span>
-                    </li>
-                  </ul>
-              </div>
-
-              <div id="tabs-popular">
-                   <ul class="post-small">
-                    <li>
-                      <a href="#"><img src="img/photos/photo-6.jpg" alt="Blog Image"></a>
-                      <p><a href="#">Morbi tincidunt, dui sit amet facilisis</a></p>
-                      <span>20 November 2012</span>
-                    </li>
-
-                    <li>
-                      <a href="#"><img src="img/photos/photo-7.jpg" alt="Blog Image"></a>
-                      <p><a href="#">Morbi tincidunt, dui sit amet facilisis</a></p>
-                      <span>20 November 2012</span>
-                    </li>
-
-                    <li>
-                      <a href="#"><img src="img/photos/photo-8.jpg" alt="Blog Image"></a>
-                      <p><a href="#">Morbi tincidunt, dui sit amet facilisis</a></p>
-                      <span>20 November 2012</span>
-                    </li>
-                  </ul>
-              </div>
-
-              <div id="tabs-comments">
-                   <ul class="post-small">
-                    <li>
-                      <a href="#"><img src="img/photos/photo-6.jpg" alt="Blog Image"></a>
-                      <p><a href="#">Morbi tincidunt, dui sit amet facilisis</a></p>
-                      <span>20 November 2012</span>
-                    </li>
-
-                    <li>
-                      <a href="#"><img src="img/photos/photo-7.jpg" alt="Blog Image"></a>
-                      <p><a href="#">Morbi tincidunt, dui sit amet facilisis</a></p>
-                      <span>20 November 2012</span>
-                    </li>
-
-                    <li>
-                      <a href="#"><img src="img/photos/photo-8.jpg" alt="Blog Image"></a>
-                      <p><a href="#">Morbi tincidunt, dui sit amet facilisis</a></p>
-                      <span>20 November 2012</span>
-                    </li>
-                  </ul>         
-              </div>
-
-            </div>
-
-          </div><!-- End Widget Tabs -->
-
-        </div>
-
-        <div class="widget">
-
-          <div class="widget-text">
-            <h4>Text Widget</h4>
-            <div class="widget-content">
-              Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
-            </div>
-          </div><!-- End Widget Text -->
-
-        </div>
-
-        <div class="widget">
-
-          <div class="widget-slide">
-            <h4>Latest Photo</h4>
-            <div class="widget-content">
-              <ul class="slides">
-                <li><img src="img/works/works-1.jpg" alt="Latest Photo"></li>
-                <li><img src="img/works/works-2.jpg" alt="Latest Photo"></li>
-                <li><img src="img/works/works-3.jpg" alt="Latest Photo"></li>
-                <li><img src="img/works/works-4.jpg" alt="Latest Photo"></li>
-              </ul>     
-            </div>
-          </div><!-- End Widget Slide -->
-
-        </div>
-
-        <div class="widget">
-
-          <div class="widget-tags">           
-            <h4>Popular Tags</h4>
-            <div class="widget-content">
-              <a href="#">news</a>
-              <a href="#">update</a>
-              <a href="#">freebies</a>
-              <a href="#">press</a>
-              <a href="#">OmniBiz</a>
-              <a href="#">design</a>
-              <a href="#">release</a>
-              <a href="#">wordpress</a>
-            </div>
-
-          </div><!-- End Widget Tags -->
-
-        </div>
-
-      </div>
-      <!-- End Sidebar -->
+    </div>
+    <!-- End Main Content -->
+
+    <!-- Start Sidebar -->
+    @Html.Action("SideBar", new { @state = Model.CurrentState })
+    <!-- End Sidebar -->
 </section>

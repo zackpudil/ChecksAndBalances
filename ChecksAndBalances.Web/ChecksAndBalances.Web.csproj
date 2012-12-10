@@ -122,6 +122,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\NinjectWebCommon.cs" />
+    <Compile Include="Controllers\ArticleController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PlayersPageController.cs" />
     <Compile Include="Global.asax.cs">
@@ -129,6 +130,7 @@
     </Compile>
     <Compile Include="Models\HomeViewModel.cs" />
     <Compile Include="Models\PlayersPageViewModel.cs" />
+    <Compile Include="Models\SideBarViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -424,6 +426,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\PlayersPage\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\PlayersPage\SideBar.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

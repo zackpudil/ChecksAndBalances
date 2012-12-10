@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using ChecksAndBalances.Data.Models.Enum;
 using ChecksAndBalances.Web.Models;
-using ChecksAndBalances.Data.Infrastructure.Extensions;
+using ChecksAndBalances.Extensions;
 
 namespace ChecksAndBalances.Web.Controllers
 {
