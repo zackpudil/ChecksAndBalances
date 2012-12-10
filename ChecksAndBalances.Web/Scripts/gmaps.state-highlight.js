@@ -19,6 +19,7 @@ var stateMap = (function ($) {
         var myOptions = {
             zoom: 4,
             center: latlng,
+            disableDefaultUI: true,
             mapTypeId: google.maps.MapTypeId.ROADMAP
         };
         map = new google.maps.Map(document.getElementById("state-map"), myOptions);

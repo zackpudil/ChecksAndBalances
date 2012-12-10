@@ -78,8 +78,11 @@
                                 <!-- Dropdown Menu -->
                                 <ul class="sf-menu">
                                     <li>
-                                        @Html.ActionLink("Choose State", "Index", "Home", new { }, new { @class = ViewBag.Title.Contains("Choose State") ? "active" : ""})
-                                        <ul></ul>
+                                        <a href="javascript:void(0);" class="@(ViewBag.Title.Contains("Home") ? "active" : "")">Home</a>
+                                        <ul>
+                                            <li>@Html.ActionLink("Home", "Index", "Home", new { }, new { })</li>
+                                            <li>@Html.ActionLink("Choose State", "Index", "Home", new { }, new { })</li>
+                                        </ul>
                                     </li>
 
                                     <li>
@@ -93,7 +96,7 @@
                                     </li>
 
                                     <li>
-                                        <a href="javascript:void(0);" class="@(ViewBag.Title.Contains("Contact") || ViewBag.Title.Contains("About") ? "active" : "")">Info</a>
+                                        <a href="javascript:void(0);" class="@(ViewBag.Title.Contains("Info") ? "active" : "")">Info</a>
                                         <ul>
                                             <li>@Html.ActionLink("About", "Index", "Home", new { }, new { })</li>
                                             <li>@Html.ActionLink("Contact", "Index", "Home", new { }, new { })</li>
@@ -101,12 +104,19 @@
                                     </li>
                                     <li>
                                         <a href="javascript:void(0);" 
-                                            class="@(ViewBag.Title.Contains("Account") || ViewBag.Title.Contains("Admin") || ViewBag.Title.Contains("Sign-up") || ViewBag.Title.Contains("Sign-in") ? "active" : "")">You</a>
+                                            class="@(ViewBag.Title.Contains("Account") ? "active" : "")">Account</a>
                                         <ul>
-                                            <li>@Html.ActionLink("Account", "Index", "Home", new { }, new { })</li>
-                                            <li>@Html.ActionLink("Admin", "Index", "Home", new { }, new { })</li>
+                                            <li>@Html.ActionLink("Settings", "Index", "Home", new { }, new { })</li>
                                             <li>@Html.ActionLink("Sign In", "Index", "Home", new { }, new { })</li>
                                             <li>@Html.ActionLink("Sign Up", "Index", "Home", new { }, new { })</li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:void(0);"
+                                            class="@(ViewBag.Title.Contains("Admin") ? "active" : "")">Admin</a>
+                                        <ul>
+                                            <li>@Html.ActionLink("Publish", "Index", "Home", new { }, new { })</li>
+                                            <li>@Html.ActionLink("Ad Management", "Index", "Home", new { }, new { })</li>
                                         </ul>
                                     </li>
                                 </ul>

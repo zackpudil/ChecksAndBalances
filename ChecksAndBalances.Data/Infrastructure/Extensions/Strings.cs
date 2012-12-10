@@ -10,7 +10,7 @@ namespace ChecksAndBalances.Extensions
     {
         public static string ToUrlSafeString(this string content)
         {
-            return content.ToLower().Replace(' ', '_');
+            return content.ToLower().Replace(' ', '_').Replace('/', '_');
         }
     }
 }

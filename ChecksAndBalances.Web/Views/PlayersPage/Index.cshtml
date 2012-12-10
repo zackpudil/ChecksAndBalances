@@ -50,7 +50,7 @@
                 </div>
                 <ul class="post-meta">
                     <li class="date">
-                        @Html.ActionLink(article.DatePublished.ToShortDateString(), "Date", "Article", new { @state = Model.CurrentState, @resource = article.DatePublished.ToShortDateString() }, new { })
+                        @Html.ActionLink(article.DatePublished.ToShortDateString(), "Date", "Article", new { @state = Model.CurrentState, @resource = article.DatePublished.ToShortDateString().ToUrlSafeString() }, new { })
                     </li>
                     <li class="author">@article.Authors</li>
                     <li class="cat">
