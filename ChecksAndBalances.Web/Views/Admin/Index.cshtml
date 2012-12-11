@@ -1,0 +1,103 @@
+﻿@model ChecksAndBalances.Web.Models.AdminArticleListViewModel
+
+@{
+    ViewBag.Title = "Checks & Balances | Admin | Articles";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+@section sectionTitle {
+    <section class="section-title">
+        <div class="container">
+            <h1><span>Articles</span> Edit, Create, and Publish</h1>
+        </div>
+    </section>
+}
+
+<section id="content" class="container add-top add-bottom">
+    <div class="columns twelve">
+        <p class="lead">
+            Create/Edit Existing Articles
+        </p>
+        <div id="accordion" data-bind="foreach: Articles">
+            <h3 class="accordion-head" data-bind="text: Title"></h3>
+            <div class="accordion-content">
+                <p data-bind="text: Description"></p>
+            </div>
+        </div>
+
+        <hr class="divder1" />
+
+        <div class="pagination">
+            <ul>
+                <li data-bind="css: { 'disabled': !prevAvailable() }">
+                    <a href="#" data-bind="enable: prevAvailable(), click: getPrevPage">Prev</a>
+                </li>
+                <!-- ko foreach: pagesToIterate -->
+                    <li data-bind="css: { 'active': $parent.CurrentPage() == $data }">
+                        <a href="#" data-bind="click: $parent.getPage, text: $data"></a>
+                    </li>
+                <!-- /ko -->
+                <li data-bind="enable: nextAvailable(), css: { 'disabled': !nextAvailable() }"> 
+                    <a href="#" data-bind="enable: nextAvailable(), click: getNextPage">Next</a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="text-center add-top">
+            @Html.RouteLink("Create Article", "Default", new { @controller = "Admin", @action = "Edit" }, new { @class = "button large" })
+        </div>
+    </div>
+</section>
+
+@section footer {
+    <script type="text/javascript" src="~/Scripts/knockout-2.2.0.js"></script>
+    <script type="text/javascript" src="~/Scripts/knockout.mapping-latest.js"></script>
+    <script type="text/javascript">
+        (function ($) {
+            var ArticleListViewModel = function (model) {
+                var self = ko.mapping.fromJS(model);
+
+                self.getPage = function(page) {
+                    self.CurrentPage(page);
+
+                    $.get('/Api/Admin/Articles', { page: page }, function(data) {
+                        self.Articles = ko.mapping.fromJS(data);
+                    });
+                };
+
+                self.getNextPage = function () {
+                    if(self.nextAvailable())
+                        self.getPage(self.CurrentPage() + 1);
+                };
+
+                self.getPrevPage = function () {
+                    if(self.prevAvailable())
+                        self.getPage(self.CurrentPage() - 1);
+                };
+
+                self.pagesToIterate = ko.computed(function() {
+                    var ret = [];
+
+                    for(var i = 0; i < self.TotalArticles()/10; i++)
+                        ret.push(i+1);
+
+                    return ret;
+                });
+
+                self.prevAvailable = ko.computed(function () {
+                    return self.CurrentPage() > 1;
+                });
+
+                self.nextAvailable = ko.computed(function () {
+                    return self.CurrentPage() != self.TotalArticles() / 10;
+                });
+
+                return self;
+            }
+
+            var viewModel = new ArticleListViewModel(@Html.Raw(Json.Encode(Model)))
+            ko.applyBindings(viewModel);
+        })(jQuery);
+    </script>
+}

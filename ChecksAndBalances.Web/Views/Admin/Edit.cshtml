@@ -1,0 +1,142 @@
+﻿@model ChecksAndBalances.Data.Models.Article
+
+@{
+    ViewBag.Title = "Checks & Balances | Admin | Publishing";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section header {
+    <style type="text/css">
+        .cke_skin_kama input.cke_dialog_ui_input_text, .cke_skin_kama input.cke_dialog_ui_input_password { margin-bottom: 0px; }
+        .state-dropdown { margin-bottom: 0px; width: 89%; display: inline; }
+        .box1 { margin-bottom: 10px; }
+        .float-right { float: right }
+    </style>
+}
+
+<section id="content" class="container">
+    <div id="primary" class="columns three-fourths first">
+        <textarea data-bind="ckeditor: Content"></textarea>
+
+         <div class="text-center add-top">
+             <a href="#" data-bind="click: save" class="button large">Save</a>
+        </div>
+    </div>
+    <div id="secondary" class="columns one-fourth">
+        <div class="widget">
+            <h4>States</h4>
+            <div class="widget-list">
+                <ul data-bind="foreach: States">
+                    <li>
+                        <span class="box1">
+                            <select class="state-dropdown" data-bind="options: $parent.SelectStates, optionsText: 'Text', optionsValue: 'Value', optionsCaption: '<Please Select>', value: StateId"></select>
+                            <a class="float-right" href="#" data-bind="click: $parent.removeState">
+                                <span class="icon-remove"></span>
+                            </a>
+                        </span>
+
+                    </li>
+                </ul>
+                <a href="#" data-bind="click: addState" class="button">Add</a>
+            </div>
+        </div>
+
+        <div class="widget">
+            <h4>Tags</h4>
+            <div class="widget-list">
+                <ul data-bind="foreach: Tags">
+                    <li>
+                        <span class="box1">
+                            <input type="text" data-bind="value: Name, ko_autocomplete: { source: $parent.tagSource() }" />
+                            <a class="float-right" href="#" data-bind="click: $parent.removeTag">
+                                <span class="icon-remove"></span>
+                            </a>
+                        </span>
+                    </li>
+                </ul>
+                <a href="#" data-bind="click: addTag" class="button">Add</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section footer {
+    <script type="text/javascript" src="~/Scripts/jquery-ui-1.9.2.autocomplete.min.js"></script>
+    <script type="text/javascript" src="~/Scripts/ckeditor/ckeditor.js"></script>
+    <script type="text/javascript" src="~/Scripts/ckeditor/adapters/jquery.js"></script>
+    <script type="text/javascript" src="~/Scripts/knockout-2.2.0.js"></script>
+    <script type="text/javascript" src="~/Scripts/knockout.mapping-latest.js"></script>
+    <script type="text/javascript">
+        (function($) {
+
+            ko.bindingHandlers.ckeditor = {
+                init: function (element, valueAccessor, allBindingsAccessor, context) {
+                    var options = allBindingsAccessor().ckeditorOptions || {};
+                    var modelValue = valueAccessor();
+                    var value = ko.utils.unwrapObservable(valueAccessor());
+
+                    $(element).html(value);
+                    $(element).ckeditor();
+
+                    var editor = $(element).ckeditorGet();
+
+                    //handle edits made in the editor
+
+                    editor.on('blur', function (e) {
+                        var self = this;
+                        if (ko.isWriteableObservable(self)) {
+                            self($(e.listenerData).val());
+                        }
+                    }, modelValue, element);
+                }
+            };
+
+            ko.bindingHandlers.ko_autocomplete = {
+                init: function (element, params) {
+                    $(element).autocomplete(params());
+                },
+                update: function (element, params) {
+                    $(element).autocomplete("option", "source", params().source);
+                }
+            };
+
+            var ArticleEditViewModel = function (model) {
+                var self = ko.mapping.fromJS(model);
+
+                self.SelectStates = @Html.Raw(Json.Encode(ViewBag.States));
+                self.SelectTags = @Html.Raw(Json.Encode(ViewBag.Tags));
+
+                self.addState = function() {
+                    self.States.push({ Id: 0, StateId: 0 });
+                };
+
+                self.removeState = function(state) {
+                    self.States.remove(state);
+                };
+
+                self.addTag = function() {
+                    self.Tags.push({ Name: "", Id: 0, Articles: [] });
+                };
+
+                self.removeTag = function(tag) {
+                    self.Tags.remove(tag);
+                };
+
+                self.tagSource = ko.computed(function() {
+                    return ko.utils.arrayMap(self.SelectTags, function(item) {
+                        return item.Name;
+                    });
+                });
+
+                self.save = function() {
+                    ko.utils.postJson("@Url.RouteUrl("Default", new { @controller = "Admin", @action = "Edit" })", ko.mapping.fromJS(self));
+                };
+
+                return self;
+            }
+
+            var viewModel = new ArticleEditViewModel(@Html.Raw(Json.Encode(Model)));
+            ko.applyBindings(viewModel);
+        })(jQuery);
+    </script>
+}

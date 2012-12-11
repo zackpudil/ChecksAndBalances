@@ -10,6 +10,12 @@ namespace ChecksAndBalances.Data.Models
 {
     public class Article
     {
+        public Article()
+        {
+            States = new List<ArticleState>();
+            Tags = new List<CategoryTag>();
+            Comments = new List<Comment>();
+        }
         public int Id { get; set; }
 
         [StringLength(int.MaxValue)]

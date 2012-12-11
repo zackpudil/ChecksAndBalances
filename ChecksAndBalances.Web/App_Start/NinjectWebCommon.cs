@@ -5,11 +5,11 @@ namespace ChecksAndBalances.Web.App_Start
 {
     using System;
     using System.Web;
-
+    using System.Web.Http;
     using Microsoft.Web.Infrastructure.DynamicModuleHelper;
-
     using Ninject;
     using Ninject.Web.Common;
+    using NinjectAdapter;
 
     public static class NinjectWebCommon 
     {
@@ -42,6 +42,8 @@ namespace ChecksAndBalances.Web.App_Start
             var kernel = new StandardKernel();
             kernel.Bind<Func<IKernel>>().ToMethod(ctx => () => new Bootstrapper().Kernel);
             kernel.Bind<IHttpModule>().To<HttpApplicationInitializationHttpModule>();
+
+            GlobalConfiguration.Configuration.DependencyResolver = new NinjectDependencyResolver(kernel);
             
             RegisterServices(kernel);
             return kernel;

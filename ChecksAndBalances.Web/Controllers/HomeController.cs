@@ -39,7 +39,7 @@ namespace ChecksAndBalances.Web.Controllers
         [HttpPost]
         public ActionResult Index(HomeViewModel viewModel)
         {
-            return this.RedirectToRoute("State", new { controller = "PlayersPage", action = "Index", state = viewModel.SelectedState });
+            return this.RedirectToRoute("Default", new { controller = "PlayersPage", action = "Index", state = viewModel.SelectedState });
         }
 
         public ActionResult SideBar(State state)

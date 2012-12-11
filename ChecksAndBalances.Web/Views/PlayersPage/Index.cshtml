@@ -1,11 +1,12 @@
-﻿@{
-    ViewBag.Title = "Checks And Balances | Players Page";
+﻿@model ChecksAndBalances.Web.Models.PlayersPageViewModel
+@using ChecksAndBalances.Extensions
+
+@{
+    ViewBag.Title = "Checks & Balances | Players Page";
     ViewBag.CurrentState = Model.CurrentState;
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-@model ChecksAndBalances.Web.Models.PlayersPageViewModel
-@using ChecksAndBalances.Extensions
 
 @section sectionTitle {
     <section class="section-title">
