@@ -1,0 +1,14 @@
+﻿@using System.Web.Mvc
+@using System.Web.Mvc.Html
+
+@helper JsonSerialize(object obj, WebViewPage page) {  
+    var jsSettings = new Newtonsoft.Json.JsonSerializerSettings
+    {
+        ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Serialize,
+        PreserveReferencesHandling = Newtonsoft.Json.PreserveReferencesHandling.Objects
+    };
+
+    var fSettings = Newtonsoft.Json.Formatting.None;
+
+    @page.Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(obj, fSettings, jsSettings))
+};

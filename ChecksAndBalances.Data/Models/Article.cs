@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,6 +17,8 @@ namespace ChecksAndBalances.Data.Models
             Tags = new List<CategoryTag>();
             Comments = new List<Comment>();
         }
+        
+        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
         [StringLength(int.MaxValue)]
@@ -29,13 +32,13 @@ namespace ChecksAndBalances.Data.Models
         public string Sources { get; set; }
 
         public bool Published { get; set; }
-        public DateTime DatePublished { get; set; }
+        public DateTime? DatePublished { get; set; }
 
         public int Views { get; set; }
         public bool SpotLighted { get; set; }
 
-        public ICollection<ArticleState> States { get; set; }
-        public ICollection<CategoryTag> Tags { get; set; }
-        public ICollection<Comment> Comments { get; set; }
+        public virtual ICollection<ArticleState> States { get; set; }
+        public virtual ICollection<CategoryTag> Tags { get; set; }
+        public virtual ICollection<Comment> Comments { get; set; }
     }
 }

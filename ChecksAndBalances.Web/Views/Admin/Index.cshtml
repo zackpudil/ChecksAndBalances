@@ -23,6 +23,7 @@
             <h3 class="accordion-head" data-bind="text: Title"></h3>
             <div class="accordion-content">
                 <p data-bind="text: Description"></p>
+                <a data-bind="attr: { href: '/Admin/Edit/'+Id() }">edit</a>
             </div>
         </div>
 
@@ -96,7 +97,7 @@
                 return self;
             }
 
-            var viewModel = new ArticleListViewModel(@Html.Raw(Json.Encode(Model)))
+            var viewModel = new ArticleListViewModel(@Helpers.JsonSerialize(Model, this))
             ko.applyBindings(viewModel);
         })(jQuery);
     </script>

@@ -3,22 +3,68 @@
 @{
     ViewBag.Title = "Checks & Balances | Admin | Publishing";
     Layout = "~/Views/Shared/_Layout.cshtml";
+  
 }
 
 @section header {
+    <link href="http://cdn.aloha-editor.org/latest/css/aloha.css" rel="stylesheet" type="text/css" />
     <style type="text/css">
-        .cke_skin_kama input.cke_dialog_ui_input_text, .cke_skin_kama input.cke_dialog_ui_input_password { margin-bottom: 0px; }
         .state-dropdown { margin-bottom: 0px; width: 89%; display: inline; }
         .box1 { margin-bottom: 10px; }
         .float-right { float: right }
     </style>
 }
 
+@section sectionTitle {
+    <section class="title">
+        <div class="container">
+            <h1><span>Editor your article</span></h1>
+        </div>
+    </section>
+}
+
 <section id="content" class="container">
     <div id="primary" class="columns three-fourths first">
-        <textarea data-bind="ckeditor: Content"></textarea>
+        <div class="post-entry">
+            <div class="post-head columns nine first">
+                <div class="post-date columns one first">
+                    publish <br /> date
+                </div>
+                <h4 class="post-title">
+                    <input type="text" data-bind="value: Title" placeholder="Title goes here..." />
+                </h4>
+
+                <div class="post-media">
+                    <img src="" alt="title-imag" />
+                </div>
+
+                <ul class="post-meta">
+                    <li class="author">Author..</li>
+                    <li class="cat" data-bind="foreach: Tags">
+                        <a href="#" data-bind="text: Name"></a>, 
+                    </li>
+                    <li class="comments"># of comments..</li>
+                </ul>
+
+                <div class="post-content">
+                    <div class="row editable">
+                        @if (!String.IsNullOrEmpty(Model.Content))
+                        {
+                            @Html.Raw(Model.Content)
+                        }
+                        else
+                        {
+                            <p>Content goes here</p>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <hr class="divider1" />
 
          <div class="text-center add-top">
+             <a href="#" data-bind="click: publish" class="button large">Publish</a>
              <a href="#" data-bind="click: save" class="button large">Save</a>
         </div>
     </div>
@@ -61,36 +107,24 @@
 </section>
 
 @section footer {
+    <!-- load the Aloha Editor core and some plugins -->
+    
     <script type="text/javascript" src="~/Scripts/jquery-ui-1.9.2.autocomplete.min.js"></script>
-    <script type="text/javascript" src="~/Scripts/ckeditor/ckeditor.js"></script>
-    <script type="text/javascript" src="~/Scripts/ckeditor/adapters/jquery.js"></script>
     <script type="text/javascript" src="~/Scripts/knockout-2.2.0.js"></script>
     <script type="text/javascript" src="~/Scripts/knockout.mapping-latest.js"></script>
+    <script type="text/javascript" src="http://cdn.aloha-editor.org/latest/lib/require.js"></script>
+    <script src="http://cdn.aloha-editor.org/latest/lib/aloha.js"
+                        data-aloha-plugins="common/ui,
+                                            common/format,
+                                            common/list,
+                                            common/link,
+                                            common/highlighteditables,
+                                            common/image,
+                                            common/align
+                                            ">
+    </script>
     <script type="text/javascript">
         (function($) {
-
-            ko.bindingHandlers.ckeditor = {
-                init: function (element, valueAccessor, allBindingsAccessor, context) {
-                    var options = allBindingsAccessor().ckeditorOptions || {};
-                    var modelValue = valueAccessor();
-                    var value = ko.utils.unwrapObservable(valueAccessor());
-
-                    $(element).html(value);
-                    $(element).ckeditor();
-
-                    var editor = $(element).ckeditorGet();
-
-                    //handle edits made in the editor
-
-                    editor.on('blur', function (e) {
-                        var self = this;
-                        if (ko.isWriteableObservable(self)) {
-                            self($(e.listenerData).val());
-                        }
-                    }, modelValue, element);
-                }
-            };
-
             ko.bindingHandlers.ko_autocomplete = {
                 init: function (element, params) {
                     $(element).autocomplete(params());
@@ -103,8 +137,8 @@
             var ArticleEditViewModel = function (model) {
                 var self = ko.mapping.fromJS(model);
 
-                self.SelectStates = @Html.Raw(Json.Encode(ViewBag.States));
-                self.SelectTags = @Html.Raw(Json.Encode(ViewBag.Tags));
+                self.SelectStates = @Html.Raw(Json.Encode(ViewBag.States))
+                self.SelectTags = @Helpers.JsonSerialize(ViewBag.Tags, this)
 
                 self.addState = function() {
                     self.States.push({ Id: 0, StateId: 0 });
@@ -129,13 +163,29 @@
                 });
 
                 self.save = function() {
-                    ko.utils.postJson("@Url.RouteUrl("Default", new { @controller = "Admin", @action = "Edit" })", ko.mapping.fromJS(self));
+                    self.Published = false;
+                    saveContent();
+                };
+
+                self.publish = function() {
+                    self.Published = true;
+                    saveContent();
+                };
+
+                var saveContent = function() {
+                    self.Content(escape($('.editable').html()));
+                    self.DatePublished = '';
+                    ko.utils.postJson("@Url.RouteUrl("Default", new { @controller = "Admin", @action = "Edit" })", { article: ko.mapping.toJS(self) });
                 };
 
                 return self;
             }
 
-            var viewModel = new ArticleEditViewModel(@Html.Raw(Json.Encode(Model)));
+            Aloha.ready(function() {
+                Aloha.jQuery('.editable').aloha();
+            });
+
+            var viewModel = new ArticleEditViewModel(@Helpers.JsonSerialize(Model, this))
             ko.applyBindings(viewModel);
         })(jQuery);
     </script>

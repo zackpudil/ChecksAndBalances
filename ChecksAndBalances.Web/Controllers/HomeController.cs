@@ -8,16 +8,19 @@ using ChecksAndBalances.Web.Models;
 using ChecksAndBalances.Extensions;
 using ChecksAndBalances.Data.Models;
 using ChecksAndBalances.Data.Storage.Context;
+using ChecksAndBalances.Service.Services;
 
 namespace ChecksAndBalances.Web.Controllers
 {
     public class HomeController : Controller
     {
-        private IChecksAndBalancesSession _session;
+        private IArticleService _service;
+        private ICategoryTagService _tagService;
 
-        public HomeController(IChecksAndBalancesSession session)
+        public HomeController(IArticleService service, ICategoryTagService tagService)
         {
-            _session = session;
+            _service = service;
+            _tagService = tagService;
         }
         //
         // GET: /Home/
@@ -26,9 +29,7 @@ namespace ChecksAndBalances.Web.Controllers
         {
             var viewModel = new HomeViewModel
             {
-                States = Enum.GetValues(typeof(State))
-                    .Cast<State>()
-                    .Select(x => new SelectListItem {
+                States = _service.GetStates().Select(x => new SelectListItem {
                         Value = ((int)x).ToString(),
                         Text = x.ToDescription()
                     })
@@ -44,19 +45,16 @@ namespace ChecksAndBalances.Web.Controllers
 
         public ActionResult SideBar(State state)
         {
-            var articles = _session.All<Article>().Where(x => x.States.Any(y => y.StateId == (int)state));
+            var articles = _service.ArticlesByState(state);
 
             var viewModel = new SideBarViewModel
             {
                 CurrentState = state,
                 SpotLightArticles = articles
-                    .Where(x => x.SpotLighted)
-                    .OrderByDescending(x => x.DatePublished)
                     .Skip(0).Take(5)
                     .Select(x => x.Title),
 
                 RecentArticles = articles
-                    .OrderByDescending(x => x.DatePublished)
                     .Skip(0).Take(5),
 
                 PopularArticles = articles
@@ -68,13 +66,12 @@ namespace ChecksAndBalances.Web.Controllers
                     .OrderByDescending(x => x.Comments.OrderByDescending(y => y.DateCreated).FirstOrDefault().DateCreated)
                     .Skip(0).Take(5),
 
-                PopularTags = _session.All<CategoryTag>()
-                    .OrderByDescending(x => x.Articles.Count())
+                PopularTags = _tagService.GetTagsByState(state)
+                    .OrderByDescending(x => x.Articles.Count)
                     .Skip(0).Take(10)
                     .Select(x => x.Name),
 
                 LatestPhotos = articles
-                    .OrderByDescending(x => x.DatePublished)
                     .Skip(0).Take(5)
                     .Select(x => x.ImageUrl)
             };

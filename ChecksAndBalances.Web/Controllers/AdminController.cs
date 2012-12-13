@@ -8,16 +8,20 @@ using ChecksAndBalances.Data.Models.Enum;
 using ChecksAndBalances.Data.Storage.Context;
 using ChecksAndBalances.Web.Models;
 using ChecksAndBalances.Extensions;
+using ChecksAndBalances.Web.Attributes;
+using ChecksAndBalances.Service.Services;
 
 namespace ChecksAndBalances.Web.Controllers
 {
     public class AdminController : Controller
     {
-        private IChecksAndBalancesSession _session;
+        IArticleService _service;
+        ICategoryTagService _tagService;
 
-        public AdminController(IChecksAndBalancesSession session)
+        public AdminController(IArticleService service, ICategoryTagService tagService)
         {
-            _session = session;
+            _service = service;
+            _tagService = tagService;
         }
 
         //
@@ -25,12 +29,13 @@ namespace ChecksAndBalances.Web.Controllers
 
         public ActionResult Index()
         {
+            var articles = _service.GetArticles();
             var viewModel = new AdminArticleListViewModel()
             {
-                Articles = _session.All<Article>().OrderByDescending(x => x.DatePublished).Skip(0).Take(10),
+                Articles = articles,
                 CurrentPage = 1
             };
-            viewModel.TotalArticles = 10; //_session.All<Article>().Count();
+            viewModel.TotalArticles = articles.Count();
 
             return View(viewModel);
         }
@@ -38,29 +43,28 @@ namespace ChecksAndBalances.Web.Controllers
         public ActionResult Edit(int? id)
         {
             var article = id.HasValue ?
-                _session.Single<Article>(x => x.Id == id.GetValueOrDefault()) : new Article();
+                _service.Get(id.Value) : new Article();
 
-            ViewBag.States = Enum.GetValues(typeof(State))
-                .Cast<State>()
-                .Select(x => new SelectListItem { Value = ((int)x).ToString(), Text = x.ToDescription() });
+            ViewBag.States = _service.GetStates().Select(x => new SelectListItem
+            {
+                Value = ((int)x).ToString(),
+                Text = x.ToDescription()
+            });
 
-            ViewBag.Tags = _session.All<CategoryTag>();
+            ViewBag.Tags = _tagService.GetTags();
 
             return View(article);
         }
 
         [HttpPost]
         [ValidateInput(false)]
-        public ActionResult Edit(Article article)
+        public ActionResult Edit([FromJson]Article article)
         {
-            if(article.Id == 0)
-                _session.Add<Article>(article);
+            article.Content = Server.UrlDecode(article.Content);
 
-            article.DatePublished = DateTime.Now;
-            article.Views = 0;
+            _service.SaveArticle(article);
 
-            _session.CommitChanges();
-            return View(article);
+            return RedirectToAction("Edit", new { id = article.Id });
         }
 
     }

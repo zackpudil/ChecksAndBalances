@@ -20,6 +20,8 @@ namespace ChecksAndBalances.Data.Storage
         void Add<T>(IEnumerable<T> items) where T : class, new();
         void Update<T>(T item) where T : class, new();
         void Update<T>(IEnumerable<T> items) where T : class, new();
+        void AddOrUpdate<T>(T item) where T : class, new();
+        void AddOrUpdateAll<T>(IEnumerable<T> items) where T : class, new();
         IEnumerable<DbEntityValidationResult> GetValidationErrors();
     }
 }

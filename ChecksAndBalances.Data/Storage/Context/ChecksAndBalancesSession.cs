@@ -8,7 +8,7 @@ namespace ChecksAndBalances.Data.Storage.Context
 {
     public interface IChecksAndBalancesSession : ISession { }
 
-    public class ChecksAndBalancesSession : EntityFrameworkCodeFirst.EFCodeFirstSession, IChecksAndBalancesSession
+    public class ChecksAndBalancesSession : Sessions.EFCodeFirstSession, IChecksAndBalancesSession
     {
         public ChecksAndBalancesSession() : base(new ChecksAndBalancesContext()) { }
     }

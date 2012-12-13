@@ -14,5 +14,10 @@ namespace ChecksAndBalances.Data.Storage.Context
         public DbSet<ArticleState> ArticleStates { get; set; }
         public DbSet<CategoryTag> CategoryTags { get; set; }
         public DbSet<Comment> Comments { get; set; }
+
+        public ChecksAndBalancesContext()
+        {
+            this.Configuration.ProxyCreationEnabled = false;
+        }
     }
 }

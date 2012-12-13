@@ -34,7 +34,7 @@
   =============================================== -->
     <script type="text/javascript" src="~/Scripts/modernizr.js"></script>
 
-    @if(IsSectionDefined("header"))
+    @if (IsSectionDefined("header"))
     {
         @RenderSection("header")
     }
@@ -86,12 +86,12 @@
                                     </li>
 
                                     <li>
-                                        @Html.ActionLink("Players", "Index", "PlayersPage", new { @state = ViewBag.CurrentState ?? ChecksAndBalances.Data.Models.Enum.State.DC }, new { @class = ViewBag.Title.Contains("Players Page") ? "active" : ""})
+                                        @Html.ActionLink("Players", "Index", "PlayersPage", new { @state = ViewBag.CurrentState ?? ChecksAndBalances.Data.Models.Enum.State.DC }, new { @class = ViewBag.Title.Contains("Players Page") ? "active" : "" })
                                         <ul></ul>
                                     </li>
 
                                     <li>
-                                        @Html.ActionLink("Archive", "Index", "Article", new { @state = ViewBag.CurrentState ?? ChecksAndBalances.Data.Models.Enum.State.DC }, new { @class = ViewBag.Title.Contains("Archive") ? "active" : ""})
+                                        @Html.ActionLink("Archive", "Index", "Article", new { @state = ViewBag.CurrentState ?? ChecksAndBalances.Data.Models.Enum.State.DC }, new { @class = ViewBag.Title.Contains("Archive") ? "active" : "" })
                                         <ul></ul>
                                     </li>
 
@@ -142,7 +142,7 @@
             <!-- End Header -->
             <div class="header-filler"></div>
 
-            @if(IsSectionDefined("sectionTitle"))
+            @if (IsSectionDefined("sectionTitle"))
             {
                 @RenderSection("sectionTitle")
             }
@@ -183,13 +183,13 @@
                     </div>
                     <!-- End Footer Widget Item -->
 
-                     <!-- Start Footer Widget Item -->
+                    <!-- Start Footer Widget Item -->
                     <div class="columns one-third">
                         <h4>Latest Tweet</h4>
-                        <div id="tweets" class="widget-content">          
+                        <div id="tweets" class="widget-content">
                         </div>
                     </div>
-                    <!-- End Footer Widget Item -->         
+                    <!-- End Footer Widget Item -->
 
                 </div>
                 <!-- End Footer Widget -->
@@ -238,7 +238,7 @@
     <script type="text/javascript" src="~/Scripts/jquery.gmap.min.js"></script>
     <script type="text/javascript" src="~/Scripts/omnibiz-custom.js"></script>
 
-    @if(IsSectionDefined("footer"))
+    @if (IsSectionDefined("footer"))
     {
         @RenderSection("footer")
     }

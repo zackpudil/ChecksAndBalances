@@ -17,7 +17,6 @@ namespace ChecksAndBalances.Web.Models
         public IEnumerable<Article> RecentlyCommentArticles { get; set; }
 
         public IEnumerable<string> LatestPhotos { get; set; }
-
         public IEnumerable<string> PopularTags { get; set; }
     }
 }
