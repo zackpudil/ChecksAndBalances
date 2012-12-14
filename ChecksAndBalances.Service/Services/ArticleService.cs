@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using ChecksAndBalances.Data.Models;
 using ChecksAndBalances.Data.Models.Enum;
 using ChecksAndBalances.Data.Storage.Context;
+using Newtonsoft.Json;
 
 namespace ChecksAndBalances.Service.Services
 {
@@ -18,8 +19,11 @@ namespace ChecksAndBalances.Service.Services
 
         IEnumerable<State> GetStates();
         
+        Article GetArticleInProgress(int id);
+        IEnumerable<Article> GetArticlesInProgress();
 
-        Article SaveArticle(Article viewModel);
+        ArticleInProgress SaveArticle(ArticleInProgress article);
+        Article PublishArticle(Article article);
     }
 
     class ArticleService : IArticleService
@@ -41,6 +45,30 @@ namespace ChecksAndBalances.Service.Services
             return _session.All<Article>().OrderByDescending(x => x.DatePublished).ToList();
         }
 
+        public Article GetArticleInProgress(int id)
+        {
+            var articleInProgress = _session.Single<ArticleInProgress>(x => x.Id == id);
+            if (articleInProgress == null)
+                return null;
+
+            var article = JsonConvert.DeserializeObject<Article>(articleInProgress.SavedContent, new JsonSerializerSettings
+            {
+                PreserveReferencesHandling = PreserveReferencesHandling.Objects
+            });
+
+            return article;
+        }
+
+        public IEnumerable<Article> GetArticlesInProgress()
+        {
+            var articlesInProgress = _session.All<ArticleInProgress>();
+
+            return articlesInProgress.ToList().Select(x => JsonConvert.DeserializeObject<Article>(x.SavedContent, new JsonSerializerSettings
+            {
+                PreserveReferencesHandling = PreserveReferencesHandling.Objects
+            }));
+        }
+
         public IEnumerable<Article> ArticlesByState(State state)
         {
             return GetByState(state).OrderByDescending(x => x.DatePublished).ToList();
@@ -51,16 +79,27 @@ namespace ChecksAndBalances.Service.Services
             return Enum.GetValues(typeof(State)).Cast<State>();
         }
 
-        public Article SaveArticle(Article article)
+        public ArticleInProgress SaveArticle(ArticleInProgress article)
         {
-            article.Views = 0;
-            article.DatePublished = DateTime.Now;
+            var saveArticle = _session.Single<ArticleInProgress>(x => x.Id == article.Id) ?? article;
+            saveArticle.SavedContent = article.SavedContent;
+
+            _session.AddOrUpdate<ArticleInProgress>(article);
+
+            _session.CommitChanges();
+            return article;
+        }
+
+        public Article PublishArticle(Article article)
+        {
+            article.States.ToList().ForEach(x => x.Article = article);
+            article.Tags.ToList().ForEach(x =>
+            {
+                if (!x.Articles.Any(y => y.Id == article.Id))
+                    x.Articles.Add(article);
+            });
 
             _session.AddOrUpdate(article);
-            _session.AddOrUpdateAll(article.Tags);
-            _session.AddOrUpdateAll(article.States);
-            _session.AddOrUpdateAll(article.Comments);
-
             _session.CommitChanges();
 
             return article;

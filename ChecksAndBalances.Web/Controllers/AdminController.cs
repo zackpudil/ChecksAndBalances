@@ -10,6 +10,7 @@ using ChecksAndBalances.Web.Models;
 using ChecksAndBalances.Extensions;
 using ChecksAndBalances.Web.Attributes;
 using ChecksAndBalances.Service.Services;
+using Newtonsoft.Json;
 
 namespace ChecksAndBalances.Web.Controllers
 {
@@ -29,7 +30,7 @@ namespace ChecksAndBalances.Web.Controllers
 
         public ActionResult Index()
         {
-            var articles = _service.GetArticles();
+            var articles = _service.GetArticlesInProgress();
             var viewModel = new AdminArticleListViewModel()
             {
                 Articles = articles,
@@ -42,8 +43,9 @@ namespace ChecksAndBalances.Web.Controllers
 
         public ActionResult Edit(int? id)
         {
-            var article = id.HasValue ?
-                _service.Get(id.Value) : new Article();
+            var article = _service.GetArticleInProgress(id.GetValueOrDefault()) ?? new Article();
+
+            article.Id = id.GetValueOrDefault();
 
             ViewBag.States = _service.GetStates().Select(x => new SelectListItem
             {
@@ -61,11 +63,27 @@ namespace ChecksAndBalances.Web.Controllers
         public ActionResult Edit([FromJson]Article article)
         {
             article.Content = Server.UrlDecode(article.Content);
+            var id = _service.SaveArticle(new ArticleInProgress
+            {
+                Id = article.Id,
+                SavedContent = JsonConvert.SerializeObject(article, Formatting.None, new JsonSerializerSettings
+                {
+                    ReferenceLoopHandling = ReferenceLoopHandling.Serialize,
+                    PreserveReferencesHandling = PreserveReferencesHandling.Objects
+                })
+            });
 
-            _service.SaveArticle(article);
-
-            return RedirectToAction("Edit", new { id = article.Id });
+            return RedirectToAction("Edit", new { id = id.Id });
         }
 
+        [HttpPost]
+        [ValidateInput(false)]
+        public ActionResult Publish([FromJson]Article article)
+        {
+            article.Content = Server.UrlDecode(article.Content);
+            _service.PublishArticle(article);
+
+            return RedirectToRoute(new { controllor = "Article", action = "Get", state = article.States.First().State, resource = article.Title.ToUrlSafeString() });
+        }
     }
 }

@@ -22,7 +22,7 @@ namespace ChecksAndBalances.Data.Storage.Sessions
             _context.SaveChanges();
         }
 
-        public void Delete<T>(Expression<Func<T, bool>> expression) where T : class, new()
+        public void Delete<T>(Expression<Func<T, bool>> expression) where T : class, IEntity, new()
         {
             var query = All<T>().Where(expression);
             foreach (var item in query)
@@ -31,12 +31,12 @@ namespace ChecksAndBalances.Data.Storage.Sessions
             }
         }
 
-        public void Delete<T>(T item) where T : class, new()
+        public void Delete<T>(T item) where T : class, IEntity, new()
         {
             _context.Entry<T>(item).State = System.Data.EntityState.Deleted;
         }
 
-        public void DeleteAll<T>() where T : class, new()
+        public void DeleteAll<T>() where T : class, IEntity, new()
         {
             var query = All<T>();
             foreach (var item in query)
@@ -50,22 +50,22 @@ namespace ChecksAndBalances.Data.Storage.Sessions
             _context.Dispose();
         }
 
-        public T Single<T>(Expression<Func<T, bool>> expression) where T : class, new()
+        public T Single<T>(Expression<Func<T, bool>> expression) where T : class, IEntity, new()
         {
             return All<T>().FirstOrDefault(expression);
         }
 
-        public IQueryable<T> All<T>() where T : class, new()
+        public IQueryable<T> All<T>() where T : class, IEntity, new()
         {
             return _context.Set<T>();
         }
 
-        public void Add<T>(T item) where T : class, new()
+        public void Add<T>(T item) where T : class, IEntity, new()
         {
             _context.Entry<T>(item).State = System.Data.EntityState.Added;
         }
 
-        public void Add<T>(IEnumerable<T> items) where T : class, new()
+        public void Add<T>(IEnumerable<T> items) where T : class, IEntity, new()
         {
             if (items == null)
             {
@@ -78,13 +78,23 @@ namespace ChecksAndBalances.Data.Storage.Sessions
             }
         }
 
-        public void Update<T>(T item) where T : class, new()
+        public void Update<T>(T item) where T : class, IEntity, new()
         {
-            _context.Entry<T>(item).State = System.Data.EntityState.Modified;
+            var entry = _context.Entry<T>(item);
 
+            var attachedEntity = _context.Set<T>().Find(item.Id);
+            if (attachedEntity != null)
+            {
+                _context.Entry<T>(attachedEntity).CurrentValues.SetValues(item);
+                _context.Entry<T>(attachedEntity).State = System.Data.EntityState.Modified;
+            }
+            else
+            {
+                _context.Entry<T>(item).State = System.Data.EntityState.Modified;
+            }
         }
 
-        public void Update<T>(IEnumerable<T> items) where T : class, new()
+        public void Update<T>(IEnumerable<T> items) where T : class, IEntity, new()
         {
             if (items == null)
             {
@@ -97,20 +107,20 @@ namespace ChecksAndBalances.Data.Storage.Sessions
             }
         }
 
-        public void AddOrUpdate<T>(T item) where T : class, new()
+        public void AddOrUpdate<T>(T item) where T : class, IEntity, new()
         {
-            if ((int)item.GetType().GetProperty("Id").GetValue(item) == 0)
+            if (item.Id == 0)
                 Add(item);
             else
                 Update(item);
         }
 
-        public void AddOrUpdateAll<T>(IEnumerable<T> items) where T : class, new()
+        public void AddOrUpdate<T>(IEnumerable<T> items) where T : class, IEntity, new()
         {
-            if(items == null)
+            if (items == null)
                 return;
 
-            foreach(var item in items)
+            foreach (var item in items)
                 AddOrUpdate(item);
         }
 

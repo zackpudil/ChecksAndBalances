@@ -12,6 +12,7 @@
         .state-dropdown { margin-bottom: 0px; width: 89%; display: inline; }
         .box1 { margin-bottom: 10px; }
         .float-right { float: right }
+        .post-media img.small-img { width: 250px; height: 200px; }
     </style>
 }
 
@@ -35,7 +36,8 @@
                 </h4>
 
                 <div class="post-media">
-                    <img src="" alt="title-imag" />
+                    <textarea data-bind="value: Description" placeholder="Synapse of article goes here."></textarea>
+                    <img class="small-img" data-bind="attr: { src: ImageUrl }" /><input type="text" data-bind="value: ImageUrl" placeholder="Title Image url" />
                 </div>
 
                 <ul class="post-meta">
@@ -64,8 +66,8 @@
         <hr class="divider1" />
 
          <div class="text-center add-top">
-             <a href="#" data-bind="click: publish" class="button large">Publish</a>
              <a href="#" data-bind="click: save" class="button large">Save</a>
+             <a href="#" data-bind="click: publish" class="button large">Publish</a>
         </div>
     </div>
     <div id="secondary" class="columns one-fourth">
@@ -164,18 +166,20 @@
 
                 self.save = function() {
                     self.Published = false;
-                    saveContent();
-                };
 
-                self.publish = function() {
-                    self.Published = true;
-                    saveContent();
-                };
-
-                var saveContent = function() {
                     self.Content(escape($('.editable').html()));
                     self.DatePublished = '';
+
                     ko.utils.postJson("@Url.RouteUrl("Default", new { @controller = "Admin", @action = "Edit" })", { article: ko.mapping.toJS(self) });
+                };
+
+                self.publish = function () {
+                    self.Published = false;
+
+                    self.Content(escape($('.editable').html()));
+                    self.DatePublished = '';
+
+                    ko.utils.postJson("@Url.RouteUrl("Default", new { @controller = "Admin", @action = "Publish" })", { article: ko.mapping.toJS(self) });
                 };
 
                 return self;

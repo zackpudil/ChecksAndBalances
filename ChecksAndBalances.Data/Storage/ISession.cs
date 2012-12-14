@@ -11,17 +11,17 @@ namespace ChecksAndBalances.Data.Storage
     public interface ISession : IDisposable
     {
         void CommitChanges();
-        void Delete<T>(Expression<Func<T, bool>> expression) where T : class, new();
-        void Delete<T>(T item) where T : class, new();
-        void DeleteAll<T>() where T : class, new();
-        T Single<T>(Expression<Func<T, bool>> expression) where T : class, new();
-        System.Linq.IQueryable<T> All<T>() where T : class, new();
-        void Add<T>(T item) where T : class, new();
-        void Add<T>(IEnumerable<T> items) where T : class, new();
-        void Update<T>(T item) where T : class, new();
-        void Update<T>(IEnumerable<T> items) where T : class, new();
-        void AddOrUpdate<T>(T item) where T : class, new();
-        void AddOrUpdateAll<T>(IEnumerable<T> items) where T : class, new();
+        void Delete<T>(Expression<Func<T, bool>> expression) where T : class, IEntity, new();
+        void Delete<T>(T item) where T : class, IEntity, new();
+        void DeleteAll<T>() where T : class, IEntity, new();
+        T Single<T>(Expression<Func<T, bool>> expression) where T : class, IEntity, new();
+        System.Linq.IQueryable<T> All<T>() where T : class, IEntity, new();
+        void Add<T>(T item) where T : class, IEntity, new();
+        void Add<T>(IEnumerable<T> items) where T : class, IEntity, new();
+        void Update<T>(T item) where T : class, IEntity, new();
+        void Update<T>(IEnumerable<T> items) where T : class, IEntity, new();
+        void AddOrUpdate<T>(T item) where T : class, IEntity, new();
+        void AddOrUpdate<T>(IEnumerable<T> items) where T : class, IEntity, new();
         IEnumerable<DbEntityValidationResult> GetValidationErrors();
     }
 }

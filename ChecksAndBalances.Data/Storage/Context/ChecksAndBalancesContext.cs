@@ -14,10 +14,13 @@ namespace ChecksAndBalances.Data.Storage.Context
         public DbSet<ArticleState> ArticleStates { get; set; }
         public DbSet<CategoryTag> CategoryTags { get; set; }
         public DbSet<Comment> Comments { get; set; }
+        public DbSet<ArticleInProgress> ArticlesInProgres { get; set; }
 
-        public ChecksAndBalancesContext()
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            this.Configuration.ProxyCreationEnabled = false;
+            modelBuilder.Entity<Article>()
+                .Property(a => a.DatePublished)
+                .HasColumnType("datetime2");
         }
     }
 }

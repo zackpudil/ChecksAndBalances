@@ -7,5 +7,5 @@ using System.Threading.Tasks;
 
 namespace ChecksAndBalances.Data.Storage.Context
 {
-    public class ChecksAndBalancesInitializer : DropCreateDatabaseIfModelChanges<ChecksAndBalancesContext> { }
+    public class ChecksAndBalancesInitializer : DropCreateDatabaseAlways<ChecksAndBalancesContext> { }
 }

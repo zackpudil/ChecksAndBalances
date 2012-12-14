@@ -6,10 +6,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ChecksAndBalances.Data.Models.Enum;
+using ChecksAndBalances.Data.Storage;
 
 namespace ChecksAndBalances.Data.Models
 {
-    public class Article
+    public class Article : IEntity
     {
         public Article()
         {
@@ -32,7 +33,7 @@ namespace ChecksAndBalances.Data.Models
         public string Sources { get; set; }
 
         public bool Published { get; set; }
-        public DateTime? DatePublished { get; set; }
+        public DateTime DatePublished { get; set; }
 
         public int Views { get; set; }
         public bool SpotLighted { get; set; }
