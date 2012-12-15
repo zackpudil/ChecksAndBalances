@@ -58,6 +58,7 @@
                         @foreach (var cat in article.Tags)
                         {
                             @Html.ActionLink(cat.Name, "Category", "Article", new { @state = Model.CurrentState, @resource = cat.Name.ToUrlSafeString() }, new { })
+                            <span>, </span>
                         }
                     </li>
                     <li class="comments">@article.Comments.Count() Comments</li>

@@ -131,14 +131,12 @@
     <Compile Include="App_Start\NinjectWebCommon.cs" />
     <Compile Include="Attribute\FromJsonAttribute.cs" />
     <Compile Include="Controllers\AdminController.cs" />
-    <Compile Include="Controllers\Api\AdminController.cs" />
     <Compile Include="Controllers\ArticleController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PlayersPageController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\AdminArticleListViewModel.cs" />
     <Compile Include="Models\HomeViewModel.cs" />
     <Compile Include="Models\PlayersPageViewModel.cs" />
     <Compile Include="Models\SideBarViewModel.cs" />

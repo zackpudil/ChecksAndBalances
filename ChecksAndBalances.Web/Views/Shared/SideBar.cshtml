@@ -39,10 +39,10 @@
                         @foreach (var article in Model.RecentArticles)
                         {
                             <li>
-                                <a href="@Url.Action("Get", "Article", new { @state = Model.CurrentState, @resourceName = article.Title.ToUrlSafeString() })">
+                                <a href="@Url.Action("Get", "Article", new { @state = Model.CurrentState, @resource = article.Title.ToUrlSafeString() })">
                                     <img src="@article.ImageUrl" />
                                 </a>
-                                <p>@Html.ActionLink(article.Title, "Get", "Article", new { @state = Model.CurrentState, @resourceName = article.Title.ToUrlSafeString() }, new { })</p>
+                                <p>@Html.ActionLink(article.Title, "Get", "Article", new { @state = Model.CurrentState, @resource = article.Title.ToUrlSafeString() }, new { })</p>
                                 <span>@article.DatePublished.ToShortDateString()</span>
                             </li>
                         }
@@ -54,10 +54,10 @@
                         @foreach (var article in Model.PopularArticles)
                         {
                             <li>
-                                <a href="@Url.Action("Get", "Article", new { @state=Model.CurrentState, @resourceName = article.Title.ToUrlSafeString() })">
+                                <a href="@Url.Action("Get", "Article", new { @state=Model.CurrentState, @resource = article.Title.ToUrlSafeString() })">
                                     <img src="@article.ImageUrl" />
                                 </a>
-                                <p>@Html.ActionLink(article.Title, "Get", "Article", new { @state = Model.CurrentState, @resourceName = article.Title.ToUrlSafeString() }, new { })</p>
+                                <p>@Html.ActionLink(article.Title, "Get", "Article", new { @state = Model.CurrentState, @resource = article.Title.ToUrlSafeString() }, new { })</p>
                                 <span>@article.DatePublished.ToShortDateString()</span>
                             </li>
                         }
@@ -69,10 +69,10 @@
                         @foreach (var article in Model.RecentlyCommentArticles)
                         {
                             <li>
-                                <a href="@Url.Action("Get", "Article", new { @state=Model.CurrentState, @resourceName = article.Title.ToUrlSafeString() })">
+                                <a href="@Url.Action("Get", "Article", new { @state=Model.CurrentState, @resource = article.Title.ToUrlSafeString() })">
                                     <img src="@article.ImageUrl" />
                                 </a>
-                                <p>@Html.ActionLink(article.Title, "Get", "Article", new { @state = Model.CurrentState, @resourceName = article.Title.ToUrlSafeString() }, new { })</p>
+                                <p>@Html.ActionLink(article.Title, "Get", "Article", new { @state = Model.CurrentState, @resource = article.Title.ToUrlSafeString() }, new { })</p>
                                 <span>@article.DatePublished.ToShortDateString()</span>
                             </li>
                         }
@@ -122,7 +122,7 @@
             <div class="widget-content">
                 @foreach (var category in Model.PopularTags)
                 {
-                    @Html.ActionLink(category, "Category", "Article", new { @state = Model.CurrentState, @resourceName = category.ToUrlSafeString() }, new { })
+                    @Html.ActionLink(category, "Category", "Article", new { @state = Model.CurrentState, @resource = category.ToUrlSafeString() }, new { })
                 }
             </div>
 

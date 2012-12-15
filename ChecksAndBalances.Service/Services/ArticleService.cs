@@ -92,6 +92,12 @@ namespace ChecksAndBalances.Service.Services
 
         public Article PublishArticle(Article article)
         {
+            _session.Delete<ArticleInProgress>(x => x.Id == article.Id);
+
+            article.Id = 0;
+            article.DatePublished = DateTime.Now;
+            article.Published = true;
+
             article.States.ToList().ForEach(x => x.Article = article);
             article.Tags.ToList().ForEach(x =>
             {
@@ -99,7 +105,7 @@ namespace ChecksAndBalances.Service.Services
                     x.Articles.Add(article);
             });
 
-            _session.AddOrUpdate(article);
+            _session.Add(article);
             _session.CommitChanges();
 
             return article;

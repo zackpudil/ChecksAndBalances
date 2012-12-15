@@ -28,17 +28,9 @@ namespace ChecksAndBalances.Web.Controllers
         //
         // GET: /Admin/
 
-        public ActionResult Index()
+        public ActionResult Index(int? page)
         {
-            var articles = _service.GetArticlesInProgress();
-            var viewModel = new AdminArticleListViewModel()
-            {
-                Articles = articles,
-                CurrentPage = 1
-            };
-            viewModel.TotalArticles = articles.Count();
-
-            return View(viewModel);
+            return View(_service.GetArticlesInProgress());
         }
 
         public ActionResult Edit(int? id)

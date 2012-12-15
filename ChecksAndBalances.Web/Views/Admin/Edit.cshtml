@@ -12,7 +12,8 @@
         .state-dropdown { margin-bottom: 0px; width: 89%; display: inline; }
         .box1 { margin-bottom: 10px; }
         .float-right { float: right }
-        .post-media img.small-img { width: 250px; height: 200px; }
+        .post-media img.small-img { width: 250px; height: 200px; display: inline; }
+        .hover { border: 2px solid yellow !important; }
     </style>
 }
 
@@ -36,8 +37,8 @@
                 </h4>
 
                 <div class="post-media">
+                    <img id="dragImage" class="small-img" data-bind="attr: { src: ImageUrl }, draganddrop: ImageUrl" alt="Drag Image here..." />
                     <textarea data-bind="value: Description" placeholder="Synapse of article goes here."></textarea>
-                    <img class="small-img" data-bind="attr: { src: ImageUrl }" /><input type="text" data-bind="value: ImageUrl" placeholder="Title Image url" />
                 </div>
 
                 <ul class="post-meta">
@@ -136,6 +137,29 @@
                 }
             };
 
+            ko.bindingHandlers.draganddrop = {
+                init: function (element, params) {
+                    element.ondragover = function () {
+                        $(this).addClass('hover');
+                        return false;
+                    };
+
+                    element.ondrop = function (e) {
+                        $(this).removeClass('hover');
+                        e.preventDefault();
+                        var file = e.dataTransfer.files[0],
+                            reader = new FileReader();
+
+                        reader.onload = function (event) {
+                            params()(event.target.result);
+                        };
+                        reader.readAsDataURL(file);
+
+                        return false;
+                    };
+                }
+            };
+
             var ArticleEditViewModel = function (model) {
                 var self = ko.mapping.fromJS(model);
 
@@ -186,6 +210,26 @@
             }
 
             Aloha.ready(function() {
+                Aloha.bind('aloha-editable-created', function (e, args) {
+                    args.obj.bind('drop', function (event) {
+                        var e = event.originalEvent;
+                        e.preventDefault();
+
+                        var file = e.dataTransfer.files[0],
+                            reader = new FileReader();
+
+                        reader.onload = function (readerEvent) {
+                            var img = $('<img sr="" alt="xyz" />');
+                            img.attr('src', readerEvent.target.result);
+
+                            Aloha.Markup.insertHTMLCode(img.get(0).outerHTML);
+                        };
+
+                        reader.readAsDataURL(file);
+                        return false;
+                    });
+                });
+
                 Aloha.jQuery('.editable').aloha();
             });
 
