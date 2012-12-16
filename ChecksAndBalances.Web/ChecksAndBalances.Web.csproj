@@ -375,7 +375,6 @@
     <Content Include="Content\Images\switcher-icon.png" />
     <Content Include="Content\Images\world-map-bg.png" />
     <Content Include="Scripts\camera.min.js" />
-    <Content Include="Scripts\ckeditor\config.js" />
     <Content Include="Scripts\gmaps.state-highlight.js" />
     <Content Include="Scripts\jquery-1.8.2.min.js" />
     <Content Include="Scripts\jquery-ui-1.9.2.autocomplete.min.js" />
