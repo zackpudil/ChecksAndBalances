@@ -4,11 +4,20 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using ChecksAndBalances.Data.Models.Enum;
+using ChecksAndBalances.Service.Services;
+using ChecksAndBalances.Extensions;
 
 namespace ChecksAndBalances.Web.Controllers
 {
     public class ArticleController : Controller
     {
+        private IArticleService _service;
+
+        public ArticleController(IArticleService service)
+        {
+            _service = service;
+        }
+
         //
         // GET: /Article/
 
@@ -19,7 +28,13 @@ namespace ChecksAndBalances.Web.Controllers
 
         public ActionResult Get(State state, string resource)
         {
-            return View();
+            ViewBag.CurrentState = state;
+
+            var article = _service.Get(resource.ToContentString());
+            if (article == null)
+                return View("404");
+
+            return View(article);
         }
 
         public ActionResult Category(State state, string resource)

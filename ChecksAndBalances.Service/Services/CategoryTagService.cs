@@ -39,7 +39,7 @@ namespace ChecksAndBalances.Service.Services
 
         public IEnumerable<CategoryTag> GetTagsByState(State state)
         {
-            return GetByState(state).SelectMany(x => x.Tags).OrderByDescending(x => x.Articles.Count()).ToList();
+            return GetByState(state).SelectMany(x => x.Tags).Distinct().OrderByDescending(x => x.Articles.Count()).ToList();
         }
 
         public IEnumerable<Article> ArticlesByTag(State state, string tag)

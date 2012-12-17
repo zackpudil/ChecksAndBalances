@@ -14,6 +14,7 @@ namespace ChecksAndBalances.Service.Services
     public interface IArticleService 
     {
         Article Get(int id);
+        Article Get(string name);
         IEnumerable<Article> GetArticles();
         IEnumerable<Article> ArticlesByState(State state);
 
@@ -38,6 +39,11 @@ namespace ChecksAndBalances.Service.Services
         public Article Get(int id)
         {
             return _session.Single<Article>(x => x.Id == id);
+        }
+
+        public Article Get(string name)
+        {
+            return _session.Single<Article>(x => x.Title.ToLower() == name.ToLower());
         }
 
         public IEnumerable<Article> GetArticles()
@@ -99,11 +105,14 @@ namespace ChecksAndBalances.Service.Services
             article.Published = true;
 
             article.States.ToList().ForEach(x => x.Article = article);
-            article.Tags.ToList().ForEach(x =>
+            article.Tags = article.Tags.ToList().Select(x =>
             {
+                x = _session.Single<CategoryTag>(y => y.Name == x.Name) ?? x;
                 if (!x.Articles.Any(y => y.Id == article.Id))
                     x.Articles.Add(article);
-            });
+
+                return x;
+            }).ToList();
 
             _session.Add(article);
             _session.CommitChanges();

@@ -75,7 +75,7 @@ namespace ChecksAndBalances.Web.Controllers
             article.Content = Server.UrlDecode(article.Content);
             _service.PublishArticle(article);
 
-            return RedirectToRoute(new { controllor = "Article", action = "Get", state = article.States.First().State, resource = article.Title.ToUrlSafeString() });
+            return RedirectToRoute(new { controller = "Article", action = "Get", state = article.States.First().State, resource = article.Title.ToUrlSafeString() });
         }
     }
 }

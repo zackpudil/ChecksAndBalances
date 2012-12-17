@@ -457,6 +457,12 @@
   <ItemGroup>
     <Content Include="App_Code\Helpers.cshtml" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\404.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Article\Get.cshtml" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

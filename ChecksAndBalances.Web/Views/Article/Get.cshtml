@@ -1,0 +1,75 @@
+﻿@using ChecksAndBalances.Extensions
+@model ChecksAndBalances.Data.Models.Article
+
+@{
+    ViewBag.Title = Model.Title;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section sectionTitle {
+    <section class="section-title">
+
+    </section>
+}
+
+<section id="content" class="container add-top add-bottom">
+    <div id="primary" class="columns three-fourths first">
+        <div class="post-entry">
+            <div class="post-head columns nine first">
+                <div class="post-date columns one first">
+                    @Model.DatePublished.ToShortDateString()
+                </div>
+                <h4 class="post-title">
+                    <a href="#">@Model.Title</a>
+                </h4>
+                <div class="post-media">
+                    <img src="@Model.ImageUrl" alt="" />
+                </div>
+                <ul class="post-meta">
+                    <li class="author">@Model.Authors</li>
+                    <li class="cat">
+                        @foreach (var tag in @Model.Tags)
+                        {
+                            @Html.RouteLink(tag.Name, new { controller = "Article", action = "Category", state = ViewBag.CurrentState, resource = tag.Name.ToUrlSafeString() })
+                            <span>, </span>
+                        }
+                    </li>
+                    <li class="comments">@Model.Comments.Count() Comments</li>
+                </ul>
+                <div class="post-content">
+                    <div class="row">
+                        @Html.Raw(Model.Content)
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <hr class="divider1" />
+
+        <h3>@Model.Comments.Count() Responses</h3>
+        <ol class="comment-list">
+            @foreach (var comment in Model.Comments)
+            {
+                <li class="comment">
+                    <div class="comment-inner">
+                        <div class="avatar">
+                            <img src="#" alt="Comment" />
+                        </div>
+
+                        <div class="comment-detail">
+                            <div class="comment-meta">
+                                <p class="comment-author">Author</p>
+                                <p class="comment-date">@comment.DateCreated.ToShortDateString()</p>
+                            </div>
+                            <div class="comment-wrap">
+                                @comment.Content
+                            </div>
+                        </div>
+
+                    </div>
+                </li>
+            }
+        </ol>
+    </div>
+    @Html.Action("SideBar", "Home", new { @state = ViewBag.CurrentState })
+</section>

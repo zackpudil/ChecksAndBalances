@@ -12,5 +12,10 @@ namespace ChecksAndBalances.Extensions
         {
             return content.ToLower().Replace(' ', '_').Replace('/', '_');
         }
+
+        public static string ToContentString(this string content)
+        {
+            return content.Replace('_', ' ');
+        }
     }
 }
