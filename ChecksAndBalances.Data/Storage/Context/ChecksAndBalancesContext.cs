@@ -15,6 +15,7 @@ namespace ChecksAndBalances.Data.Storage.Context
         public DbSet<CategoryTag> CategoryTags { get; set; }
         public DbSet<Comment> Comments { get; set; }
         public DbSet<ArticleInProgress> ArticlesInProgres { get; set; }
+        public DbSet<ArticleImage> ArticleImages { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

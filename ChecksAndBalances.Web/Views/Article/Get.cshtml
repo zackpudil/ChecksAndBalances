@@ -6,6 +6,12 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+@section header {
+    <style type="text/css">
+        img.large { width: 700px !important; height: 300px !important; }
+    </style>
+}
+
 @section sectionTitle {
     <section class="section-title">
 
@@ -23,7 +29,7 @@
                     <a href="#">@Model.Title</a>
                 </h4>
                 <div class="post-media">
-                    <img src="@Model.ImageUrl" alt="" />
+                    <img class="large" src="@Model.ImageUrl" alt="" />
                 </div>
                 <ul class="post-meta">
                     <li class="author">@Model.Authors</li>

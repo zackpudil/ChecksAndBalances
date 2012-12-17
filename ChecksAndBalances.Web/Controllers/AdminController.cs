@@ -72,7 +72,6 @@ namespace ChecksAndBalances.Web.Controllers
         [ValidateInput(false)]
         public ActionResult Publish([FromJson]Article article)
         {
-            article.Content = Server.UrlDecode(article.Content);
             _service.PublishArticle(article);
 
             return RedirectToRoute(new { controller = "Article", action = "Get", state = article.States.First().State, resource = article.Title.ToUrlSafeString() });

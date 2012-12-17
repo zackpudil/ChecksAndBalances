@@ -12,8 +12,10 @@
         .state-dropdown { margin-bottom: 0px; width: 89%; display: inline; }
         .box1 { margin-bottom: 10px; }
         .float-right { float: right }
-        .post-media img.small-img { width: 250px; height: 200px; display: inline; }
         .hover { border: 2px solid yellow !important; }
+        img.small { width: 200px !important; height: 200px !important; }
+        textarea.description { width: 450px !important; height: 146px !important; }
+        input[type="text"].title { width: 100% !important; }
     </style>
 }
 
@@ -29,25 +31,26 @@
     <div id="primary" class="columns three-fourths first">
         <div class="post-entry">
             <div class="post-head columns nine first">
-                <div class="post-date columns one first">
-                    publish <br /> date
-                </div>
-                <h4 class="post-title">
-                    <input type="text" data-bind="value: Title" placeholder="Title goes here..." />
+                <h4 class="post-title columns eight">
+                    <input class="title" type="text" data-bind="value: Title" placeholder="Title goes here..." />
                 </h4>
-
-                <div class="post-media">
-                    <img id="dragImage" class="small-img" data-bind="attr: { src: ImageUrl }, draganddrop: ImageUrl" alt="Drag Image here..." />
-                    <textarea data-bind="value: Description" placeholder="Synapse of article goes here."></textarea>
-                </div>
-
                 <ul class="post-meta">
-                    <li class="author">Author..</li>
+                    <li class="data">Publish Date</li>
+                    <li class="author"><input type="text" data-bind="value: Authors" placeholder="Authors" style="display: inline;" /></li>
                     <li class="cat" data-bind="foreach: Tags">
-                        <a href="#" data-bind="text: Name"></a>, 
+                        <a href="#" data-bind="text: Name"></a> 
+                        <span>, </span>
                     </li>
                     <li class="comments"># of comments..</li>
                 </ul>
+                <div class="post-media2">
+                    <img class="small" id="dragImage" data-bind="attr: { src: ImageUrl }, draganddrop: ImageUrl" alt="Drag Image here..." />
+                </div>
+
+                <div class="post-content">
+                    <textarea class="description" cols="20" rows="5" data-bind="value: Description" placeholder="Synapse of article goes here."></textarea>
+                </div>
+                <hr class="divider1" />
 
                 <div class="post-content">
                     <div class="row editable">
@@ -191,7 +194,7 @@
                 self.save = function() {
                     self.Published = false;
 
-                    self.Content(escape($('.editable').html()));
+                    self.Content($('.editable').html());
                     self.DatePublished = '';
 
                     ko.utils.postJson("@Url.RouteUrl("Default", new { @controller = "Admin", @action = "Edit" })", { article: ko.mapping.toJS(self) });
@@ -220,7 +223,9 @@
 
                         reader.onload = function (readerEvent) {
                             var img = $('<img sr="" alt="xyz" />');
-                            img.attr('src', readerEvent.target.result);
+                            $.post("/Api/Images/", { Id: 0, Image: readerEvent.target.result }, function(data) {
+                                img.attr('src', '/Api/Images/'+data.Id);
+                            });
 
                             Aloha.Markup.insertHTMLCode(img.get(0).outerHTML);
                         };
