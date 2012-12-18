@@ -126,7 +126,8 @@
                                             common/link,
                                             common/highlighteditables,
                                             common/image,
-                                            common/align
+                                            common/align,
+                                            common/table
                                             ">
     </script>
     <script type="text/javascript">
@@ -153,8 +154,12 @@
                         var file = e.dataTransfer.files[0],
                             reader = new FileReader();
 
-                        reader.onload = function (event) {
-                            params()(event.target.result);
+                        reader.onload = function (readerEvent) {
+                            var extension = readerEvent.target.result.match(/data:image\/([a-z]+);base64.*/i)[1];
+
+                            $.post("/Api/Images/", { Id: 0, Image: readerEvent.target.result.replace('data:image/' + extension + ';base64,', '') }, function (data) {
+                                params()('/Api/Images/' + data.Id + '.' + extension);
+                            });
                         };
                         reader.readAsDataURL(file);
 
@@ -194,7 +199,7 @@
                 self.save = function() {
                     self.Published = false;
 
-                    self.Content($('.editable').html());
+                    self.Content(escape($('.editable').html()));
                     self.DatePublished = '';
 
                     ko.utils.postJson("@Url.RouteUrl("Default", new { @controller = "Admin", @action = "Edit" })", { article: ko.mapping.toJS(self) });
@@ -222,12 +227,14 @@
                             reader = new FileReader();
 
                         reader.onload = function (readerEvent) {
-                            var img = $('<img sr="" alt="xyz" />');
-                            $.post("/Api/Images/", { Id: 0, Image: readerEvent.target.result }, function(data) {
-                                img.attr('src', '/Api/Images/'+data.Id);
+                            var img = $('<img src="" alt="xyz" />');
+                            var extension = readerEvent.target.result.match(/data:image\/([a-z]+);base64.*/i)[1];
+
+                            $.post("/Api/Images/", { Id: 0, Image: readerEvent.target.result.replace('data:image/'+extension+';base64,', '') }, function(data) {
+                                img.attr('src', '/Api/Images/'+data.Id+'.'+extension);
+                                Aloha.Markup.insertHTMLCode(img.get(0).outerHTML);
                             });
 
-                            Aloha.Markup.insertHTMLCode(img.get(0).outerHTML);
                         };
 
                         reader.readAsDataURL(file);

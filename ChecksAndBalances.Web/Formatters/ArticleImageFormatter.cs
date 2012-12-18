@@ -8,11 +8,15 @@ using ChecksAndBalances.Data.Models;
 
 namespace ChecksAndBalances.Web.Formatters
 {
-    public class ArticleImageJpegFormatter : BufferedMediaTypeFormatter
+    public class ArticleImageFormatter : BufferedMediaTypeFormatter
     {
-        public ArticleImageJpegFormatter()
+        public ArticleImageFormatter()
         {
+            SupportedMediaTypes.Add(new MediaTypeHeaderValue("image/jpeg"));
             SupportedMediaTypes.Add(new MediaTypeHeaderValue("image/jpg"));
+            SupportedMediaTypes.Add(new MediaTypeHeaderValue("image/gif"));
+            SupportedMediaTypes.Add(new MediaTypeHeaderValue("image/png"));
+            SupportedMediaTypes.Add(new MediaTypeHeaderValue("text/html"));
         }
 
         public override void WriteToStream(Type type, object value, System.IO.Stream writeStream, System.Net.Http.HttpContent content)
@@ -33,7 +37,7 @@ namespace ChecksAndBalances.Web.Formatters
 
         public override bool CanWriteType(Type type)
         {
-            return false;
+            return typeof(ArticleImage).Equals(type);
         }
     }
 }

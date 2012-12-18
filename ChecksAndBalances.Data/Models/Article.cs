@@ -5,7 +5,6 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Web.Mvc;
 using ChecksAndBalances.Data.Models.Enum;
 using ChecksAndBalances.Data.Storage;
 
@@ -24,7 +23,6 @@ namespace ChecksAndBalances.Data.Models
         public int Id { get; set; }
 
         [StringLength(int.MaxValue)]
-        [AllowHtml]
         public string Content { get; set; }
 
         public string Title { get; set; }

@@ -7,6 +7,12 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+@section header {
+    <style type="text/css">
+        img.small { width: 200px !important; height: 200px !important; }
+    </style>
+}
+
 
 @section sectionTitle {
     <section class="section-title">
@@ -33,7 +39,7 @@
                 </ul>
 
                 <div class="post-media2">
-                    <img src="~/Content/Images/icons/support.png" />
+                    <img class="small" src="~/Content/Images/icons/support.png" />
                 </div>
 
                 <div class="post-content">
@@ -65,7 +71,7 @@
                 </ul>
 
                 <div class="post-media2">
-                    <img src="@article.ImageUrl" />
+                    <img class="small" src="@article.ImageUrl" />
                 </div>
 
                 <div class="post-content">

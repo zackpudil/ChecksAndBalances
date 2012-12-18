@@ -9,7 +9,7 @@ namespace ChecksAndBalances.Web.App_Start
     using Microsoft.Web.Infrastructure.DynamicModuleHelper;
     using Ninject;
     using Ninject.Web.Common;
-    using NinjectAdapter;
+    using WebApiContrib.IoC.Ninject;
 
     public static class NinjectWebCommon 
     {
@@ -43,8 +43,8 @@ namespace ChecksAndBalances.Web.App_Start
             kernel.Bind<Func<IKernel>>().ToMethod(ctx => () => new Bootstrapper().Kernel);
             kernel.Bind<IHttpModule>().To<HttpApplicationInitializationHttpModule>();
 
-            GlobalConfiguration.Configuration.DependencyResolver = new NinjectDependencyResolver(kernel);
-            
+            GlobalConfiguration.Configuration.DependencyResolver = new NinjectResolver(kernel);
+
             RegisterServices(kernel);
             return kernel;
         }
