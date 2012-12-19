@@ -4,22 +4,20 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using ChecksAndBalances.Data.Models;
-using ChecksAndBalances.Data.Models.Enum;
-using ChecksAndBalances.Data.Storage.Context;
-using ChecksAndBalances.Web.Models;
+using ChecksAndBalances.Service.Services;
+using ChecksAndBalances.Web.Areas.Admin.Models;
 using ChecksAndBalances.Extensions;
 using ChecksAndBalances.Web.Attributes;
-using ChecksAndBalances.Service.Services;
 using Newtonsoft.Json;
 
-namespace ChecksAndBalances.Web.Controllers
+namespace ChecksAndBalances.Web.Areas.Admin.Controllers
 {
-    public class AdminController : Controller
+    public class ArticleController : Controller
     {
-        IArticleService _service;
+       IArticleService _service;
         ICategoryTagService _tagService;
 
-        public AdminController(IArticleService service, ICategoryTagService tagService)
+        public ArticleController(IArticleService service, ICategoryTagService tagService)
         {
             _service = service;
             _tagService = tagService;
@@ -30,7 +28,15 @@ namespace ChecksAndBalances.Web.Controllers
 
         public ActionResult Index(int? page)
         {
-            return View(_service.GetArticlesInProgress());
+            var viewModel = new ArticleViewModel
+            {
+                UnPublishedArticles = _service.GetArticlesInProgress(),
+                PublishedArticles = _service.GetArticles()
+                    .OrderBy(x => x.DatePublished)
+                    .Skip(page.GetValueOrDefault())
+                    .Take(ArticleViewModel.ItemsPerPage)
+            };
+            return View(viewModel);
         }
 
         public ActionResult Edit(int? id)
@@ -77,5 +83,6 @@ namespace ChecksAndBalances.Web.Controllers
 
             return RedirectToRoute(new { controller = "Article", action = "Get", state = article.States.First().State, resource = article.Title.ToUrlSafeString() });
         }
+
     }
 }

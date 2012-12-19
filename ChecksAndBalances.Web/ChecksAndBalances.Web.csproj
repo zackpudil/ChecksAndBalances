@@ -41,6 +41,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Antlr3.Runtime">
+      <HintPath>..\packages\WebGrease.1.1.0\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -67,6 +70,9 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Optimization">
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.0.0\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Extensions" />
@@ -123,9 +129,14 @@
     <Reference Include="WebApiContrib.IoC.Ninject">
       <HintPath>..\packages\WebApiContrib.IoC.Ninject.0.9.2\lib\net40\WebApiContrib.IoC.Ninject.dll</HintPath>
     </Reference>
+    <Reference Include="WebGrease">
+      <HintPath>..\packages\WebGrease.1.1.0\lib\WebGrease.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\NinjectWebCommon.cs" />
+    <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\Admin\Controllers\ArticleController.cs" />
     <Compile Include="Attribute\FromJsonAttribute.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\Api\ImagesController.cs" />
@@ -136,6 +147,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Areas\Admin\Models\ArticleViewModel.cs" />
     <Compile Include="Models\HomeViewModel.cs" />
     <Compile Include="Models\PlayersPageViewModel.cs" />
     <Compile Include="Models\SideBarViewModel.cs" />
@@ -419,6 +431,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\Admin\Views\Shared\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -465,6 +478,15 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Article\Get.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Admin\Views\Web.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Admin\Views\Article\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Admin\Views\Article\Edit.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

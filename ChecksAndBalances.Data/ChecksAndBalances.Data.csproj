@@ -59,7 +59,12 @@
     <Compile Include="Migrations\201212182106176_InitialCreate.Designer.cs">
       <DependentUpon>201212182106176_InitialCreate.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201212190232492_AddAdvertisement.cs" />
+    <Compile Include="Migrations\201212190232492_AddAdvertisement.Designer.cs">
+      <DependentUpon>201212190232492_AddAdvertisement.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\Advertisement.cs" />
     <Compile Include="Models\Article.cs" />
     <Compile Include="Models\ArticleImage.cs" />
     <Compile Include="Models\ArticleInProgress.cs" />
@@ -82,6 +87,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201212182106176_InitialCreate.resx">
       <DependentUpon>201212182106176_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201212190232492_AddAdvertisement.resx">
+      <DependentUpon>201212190232492_AddAdvertisement.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

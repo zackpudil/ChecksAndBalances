@@ -129,8 +129,8 @@
                                         <a href="javascript:void(0);"
                                             class="@(ViewBag.Title.Contains("Admin") ? "active" : "")">Admin</a>
                                         <ul>
-                                            <li>@Html.ActionLink("Publish", "Index", "Admin", new { }, new { })</li>
-                                            <li>@Html.ActionLink("Ad Management", "Index", "Home", new { }, new { })</li>
+                                            <li>@Html.RouteLink("Article Management", "Admin_default", new { @controller = "Article", @action="Index" }, new { })
+                                            <li>@Html.RouteLink("Ad Management", "Admin_default", new { @controller = "Article", @action = "Index" }, new { })
                                         </ul>
                                     </li>
                                 </ul>

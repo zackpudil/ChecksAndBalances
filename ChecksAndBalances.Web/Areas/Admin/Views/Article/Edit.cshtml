@@ -202,7 +202,7 @@
                     self.Content(escape($('.editable').html()));
                     self.DatePublished = '';
 
-                    ko.utils.postJson("@Url.RouteUrl("Default", new { @controller = "Admin", @action = "Edit" })", { article: ko.mapping.toJS(self) });
+                    ko.utils.postJson("@Url.RouteUrl("Admin_default", new { @controller = "Article", @action = "Edit" })", { article: ko.mapping.toJS(self) });
                 };
 
                 self.publish = function () {
@@ -211,7 +211,7 @@
                     self.Content(escape($('.editable').html()));
                     self.DatePublished = '';
 
-                    ko.utils.postJson("@Url.RouteUrl("Default", new { @controller = "Admin", @action = "Publish" })", { article: ko.mapping.toJS(self) });
+                    ko.utils.postJson("@Url.RouteUrl("Admin_default", new { @controller = "Article", @action = "Publish" })", { article: ko.mapping.toJS(self) });
                 };
 
                 return self;

@@ -41,5 +41,7 @@ namespace ChecksAndBalances.Data.Models
         public virtual ICollection<ArticleState> States { get; set; }
         public virtual ICollection<CategoryTag> Tags { get; set; }
         public virtual ICollection<Comment> Comments { get; set; }
+
+        public virtual Advertisement Advertisement { get; set; }
     }
 }

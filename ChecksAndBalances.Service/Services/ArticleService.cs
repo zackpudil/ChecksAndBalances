@@ -69,10 +69,15 @@ namespace ChecksAndBalances.Service.Services
         {
             var articlesInProgress = _session.All<ArticleInProgress>();
 
-            return articlesInProgress.ToList().Select(x => JsonConvert.DeserializeObject<Article>(x.SavedContent, new JsonSerializerSettings
-            {
-                PreserveReferencesHandling = PreserveReferencesHandling.Objects
-            }));
+            return articlesInProgress.ToList().Select(x => {
+                var article = JsonConvert.DeserializeObject<Article>(x.SavedContent, new JsonSerializerSettings
+                {
+                    PreserveReferencesHandling = PreserveReferencesHandling.Objects
+                });
+                article.Id = x.Id;
+
+                return article;
+            });
         }
 
         public IEnumerable<Article> ArticlesByState(State state)
