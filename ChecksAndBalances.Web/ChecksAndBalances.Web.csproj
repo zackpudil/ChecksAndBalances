@@ -138,7 +138,6 @@
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\ArticleController.cs" />
     <Compile Include="Attribute\FromJsonAttribute.cs" />
-    <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\Api\ImagesController.cs" />
     <Compile Include="Controllers\ArticleController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
