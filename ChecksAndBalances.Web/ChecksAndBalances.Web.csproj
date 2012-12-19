@@ -464,12 +464,6 @@
     <Content Include="Views\Shared\SideBar.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Admin\Index.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Admin\Edit.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="App_Code\Helpers.cshtml" />
   </ItemGroup>
   <ItemGroup>
