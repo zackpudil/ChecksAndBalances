@@ -55,6 +55,11 @@
     <Compile Include="Infrastructure\AppStart.cs" />
     <Compile Include="Infrastructure\Extensions\Enums.cs" />
     <Compile Include="Infrastructure\Extensions\Strings.cs" />
+    <Compile Include="Migrations\201212182106176_InitialCreate.cs" />
+    <Compile Include="Migrations\201212182106176_InitialCreate.Designer.cs">
+      <DependentUpon>201212182106176_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Article.cs" />
     <Compile Include="Models\ArticleImage.cs" />
     <Compile Include="Models\ArticleInProgress.cs" />
@@ -74,7 +79,11 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201212182106176_InitialCreate.resx">
+      <DependentUpon>201212182106176_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -319,6 +319,8 @@
     <Content Include="Content\Images\sliders\slide8.jpg" />
     <Content Include="Content\Images\sliders\slide9-thumb.jpg" />
     <Content Include="Content\Images\sliders\slide9.jpg" />
+    <Content Include="Content\Images\usa-alt.jpg" />
+    <Content Include="Content\Images\usa.png" />
     <Content Include="Content\Images\works\works-1.jpg" />
     <Content Include="Content\Images\works\works-2.jpg" />
     <Content Include="Content\Images\works\works-3.jpg" />
@@ -388,6 +390,7 @@
     <Content Include="Scripts\jquery.flexslider-min.js" />
     <Content Include="Scripts\jquery.gmap.min.js" />
     <Content Include="Scripts\jquery.hoverIntent.js" />
+    <Content Include="Scripts\jquery.imagemapster.js" />
     <Content Include="Scripts\jquery.isotope.min.js" />
     <Content Include="Scripts\jquery.superfish.js" />
     <Content Include="Scripts\jquery.timeago.js" />
@@ -401,6 +404,7 @@
     <Content Include="Scripts\knockout.mapping-latest.js" />
     <Content Include="Scripts\modernizr.js" />
     <Content Include="Scripts\omnibiz-custom.js" />
+    <Content Include="Scripts\state-map.js" />
     <Content Include="Scripts\styleswitch.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>

@@ -4,8 +4,9 @@ using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ChecksAndBalances.Data.Migrations;
 
 namespace ChecksAndBalances.Data.Storage.Context
 {
-    public class ChecksAndBalancesInitializer : DropCreateDatabaseAlways<ChecksAndBalancesContext> { }
+    internal class ChecksAndBalancesInitializer : MigrateDatabaseToLatestVersion<ChecksAndBalancesContext, Configuration> { }
 }

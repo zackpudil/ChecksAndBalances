@@ -30,7 +30,7 @@ namespace ChecksAndBalances.Web.Controllers
             var viewModel = new HomeViewModel
             {
                 States = _service.GetStates().Select(x => new SelectListItem {
-                        Value = ((int)x).ToString(),
+                        Value = x.ToString(),
                         Text = x.ToDescription()
                     })
             };
