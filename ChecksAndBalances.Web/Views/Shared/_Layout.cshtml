@@ -94,35 +94,49 @@
                                     <li>
                                         <a href="javascript:void(0);" class="@(ViewBag.Title.Contains("Home") ? "active" : "")">Home</a>
                                         <ul>
-                                            <li>@Html.ActionLink("Home", "Index", "Home", new { }, new { })</li>
-                                            <li>@Html.ActionLink("Choose State", "Index", "Home", new { }, new { })</li>
+                                            <li>@Html.RouteLink("Home", "Default", new { @controller = "Home", @action = "Index" })</li>
+                                            <li>@Html.RouteLink("Choose State", "Default", new { @controller = "Home", @action = "Index" })</li>
                                         </ul>
                                     </li>
 
                                     <li>
-                                        @Html.ActionLink("Players", "Index", "PlayersPage", new { @state = ViewBag.CurrentState ?? ChecksAndBalances.Data.Models.Enum.State.DC }, new { @class = ViewBag.Title.Contains("Players Page") ? "active" : "" })
+                                        @Html.RouteLink("Players", "Default", 
+                                            new 
+                                            { 
+                                                @controller = "PlayersPage", 
+                                                @action = "Index", 
+                                                @state = ViewBag.CurrentState ?? ChecksAndBalances.Data.Models.Enum.State.DC 
+                                            }, 
+                                            new { @class = ViewBag.Title.Contains("Players Page") ? "active" : "" })
                                         <ul></ul>
                                     </li>
 
                                     <li>
-                                        @Html.ActionLink("Archive", "Index", "Article", new { @state = ViewBag.CurrentState ?? ChecksAndBalances.Data.Models.Enum.State.DC }, new { @class = ViewBag.Title.Contains("Archive") ? "active" : "" })
+                                        @Html.RouteLink("Archive", "Default", 
+                                            new 
+                                            { 
+                                                @controller = "Article", 
+                                                @action = "Index", 
+                                                @state = ViewBag.CurrentState ?? ChecksAndBalances.Data.Models.Enum.State.DC 
+                                            }, 
+                                            new { @class = ViewBag.Title.Contains("Archive") ? "active" : "" })
                                         <ul></ul>
                                     </li>
 
                                     <li>
                                         <a href="javascript:void(0);" class="@(ViewBag.Title.Contains("Info") ? "active" : "")">Info</a>
                                         <ul>
-                                            <li>@Html.ActionLink("About", "Index", "Home", new { }, new { })</li>
-                                            <li>@Html.ActionLink("Contact", "Index", "Home", new { }, new { })</li>
+                                            <li>@Html.RouteLink("About", "Default", new { @controller = "Home", @action = "Index" })</li>
+                                            <li>@Html.RouteLink("Contact", "Default", new { @controller = "Home", @action = "Index" })</li>
                                         </ul>
                                     </li>
                                     <li>
                                         <a href="javascript:void(0);" 
                                             class="@(ViewBag.Title.Contains("Account") ? "active" : "")">Account</a>
                                         <ul>
-                                            <li>@Html.ActionLink("Settings", "Index", "Home", new { }, new { })</li>
-                                            <li>@Html.ActionLink("Sign In", "Index", "Home", new { }, new { })</li>
-                                            <li>@Html.ActionLink("Sign Up", "Index", "Home", new { }, new { })</li>
+                                            <li>@Html.RouteLink("Settings", "Default", new { @controller = "Home", @action = "Index" })</li>
+                                            <li>@Html.RouteLink("Sign In", "Default", new { @controller = "Home", @action = "Index" })</li>
+                                            <li>@Html.RouteLink("Sign Up", "Default", new { @controller = "Home", @action = "Index" })</li>
                                         </ul>
                                     </li>
                                     <li>
@@ -130,7 +144,7 @@
                                             class="@(ViewBag.Title.Contains("Admin") ? "active" : "")">Admin</a>
                                         <ul>
                                             <li>@Html.RouteLink("Article Management", "Admin_default", new { @controller = "Article", @action="Index" }, new { })
-                                            <li>@Html.RouteLink("Ad Management", "Admin_default", new { @controller = "Article", @action = "Index" }, new { })
+                                            <li>@Html.RouteLink("Ad Management", "Admin_default", new { @controller = "Advertisement", @action = "Index" }, new { })
                                         </ul>
                                     </li>
                                 </ul>

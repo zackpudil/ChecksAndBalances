@@ -81,7 +81,8 @@ namespace ChecksAndBalances.Web.Areas.Admin.Controllers
             article.Content = Server.UrlDecode(article.Content);
             _service.PublishArticle(article);
 
-            return RedirectToRoute(new { controller = "Article", action = "Get", state = article.States.First().State, resource = article.Title.ToUrlSafeString() });
+            var url = Url.RouteUrl("Default", new { controller = "Article", action = "Get", state = article.States.First().State, resource = article.Title.ToUrlSafeString() });
+            return Redirect(url);
         }
 
     }

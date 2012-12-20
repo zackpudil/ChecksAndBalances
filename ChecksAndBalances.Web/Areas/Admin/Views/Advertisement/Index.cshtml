@@ -1,0 +1,74 @@
+﻿@model System.Collections.Generic.IEnumerable<ChecksAndBalances.Data.Models.Advertisement>
+@using ChecksAndBalances.Extensions
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section sectionTitle {
+    <section class="section-title">
+        <h1><span>Advertisement</span> Maintenance</h1>
+    </section>
+}
+
+<section id="content" class="container">
+    <div class="columns twelve">
+        <h4>Advertisements</h4>
+        @if (!Model.Any())
+        {
+            <h4>You have no Advertisements</h4>
+        }
+        else
+        {
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Sort Order</th>
+                        <th>Client</th>
+                        <th>Image</th>
+                        <th>Link</th>
+                        <th>Articles</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var advert in Model)
+                    {
+                        <tr>
+                            <td>@advert.SortOrder</td>
+                            <td>@advert.ClientName</td>
+                            <td>
+                                <img width="50" src="@advert.ImageUrl" />
+                            </td>
+                            <td>
+                                <a href="@advert.Url">@advert.Url</a>
+                            </td>
+                            <td>
+                                @if(advert.Articles.Any())
+                                {
+                                    <ul class="styled-list arrow-3">
+                                        @foreach(var article in advert.Articles)
+                                        {
+                                            <li>
+                                                @Html.RouteLink(article.Title, "Default", new { @controller = "Article", @action = "Get", @resource = article.Title.ToUrlSafeString(), @state = article.States.First().State }, new { })
+                                            </li>
+                                        }
+                                    </ul>
+                                }
+                            </td>
+                            <td>
+                                <a href="#" class="button red">Delete</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+
+        <hr class="divider1" />
+
+        <div class="text-center add-top">
+            @Html.RouteLink("Create Advert", "Admin_default", new { @controller = "Advertisement", @action = "Edit" }, new { @class = "button large" })
+        </div>
+    </div>
+</section>

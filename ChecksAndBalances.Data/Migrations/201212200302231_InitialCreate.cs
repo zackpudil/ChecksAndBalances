@@ -22,8 +22,11 @@ namespace ChecksAndBalances.Data.Migrations
                         DatePublished = c.DateTime(nullable: false, storeType: "datetime2"),
                         Views = c.Int(nullable: false),
                         SpotLighted = c.Boolean(nullable: false),
+                        Advertisement_Id = c.Int(),
                     })
-                .PrimaryKey(t => t.Id);
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.Advertisements", t => t.Advertisement_Id)
+                .Index(t => t.Advertisement_Id);
             
             CreateTable(
                 "dbo.ArticleStates",
@@ -58,6 +61,19 @@ namespace ChecksAndBalances.Data.Migrations
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.Articles", t => t.Article_Id)
                 .Index(t => t.Article_Id);
+            
+            CreateTable(
+                "dbo.Advertisements",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        ClientName = c.String(),
+                        SortOrder = c.Int(nullable: false),
+                        ImageUrl = c.String(),
+                        Url = c.String(),
+                        DateCreated = c.DateTime(nullable: false, storeType: "datetime2"),
+                    })
+                .PrimaryKey(t => t.Id);
             
             CreateTable(
                 "dbo.ArticleInProgresses",
@@ -98,13 +114,16 @@ namespace ChecksAndBalances.Data.Migrations
             DropIndex("dbo.CategoryTagArticles", new[] { "CategoryTag_Id" });
             DropIndex("dbo.Comments", new[] { "Article_Id" });
             DropIndex("dbo.ArticleStates", new[] { "Article_Id" });
+            DropIndex("dbo.Articles", new[] { "Advertisement_Id" });
             DropForeignKey("dbo.CategoryTagArticles", "Article_Id", "dbo.Articles");
             DropForeignKey("dbo.CategoryTagArticles", "CategoryTag_Id", "dbo.CategoryTags");
             DropForeignKey("dbo.Comments", "Article_Id", "dbo.Articles");
             DropForeignKey("dbo.ArticleStates", "Article_Id", "dbo.Articles");
+            DropForeignKey("dbo.Articles", "Advertisement_Id", "dbo.Advertisements");
             DropTable("dbo.CategoryTagArticles");
             DropTable("dbo.ArticleImages");
             DropTable("dbo.ArticleInProgresses");
+            DropTable("dbo.Advertisements");
             DropTable("dbo.Comments");
             DropTable("dbo.CategoryTags");
             DropTable("dbo.ArticleStates");

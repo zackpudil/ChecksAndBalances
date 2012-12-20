@@ -55,13 +55,9 @@
     <Compile Include="Infrastructure\AppStart.cs" />
     <Compile Include="Infrastructure\Extensions\Enums.cs" />
     <Compile Include="Infrastructure\Extensions\Strings.cs" />
-    <Compile Include="Migrations\201212182106176_InitialCreate.cs" />
-    <Compile Include="Migrations\201212182106176_InitialCreate.Designer.cs">
-      <DependentUpon>201212182106176_InitialCreate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201212190232492_AddAdvertisement.cs" />
-    <Compile Include="Migrations\201212190232492_AddAdvertisement.Designer.cs">
-      <DependentUpon>201212190232492_AddAdvertisement.cs</DependentUpon>
+    <Compile Include="Migrations\201212200302231_InitialCreate.cs" />
+    <Compile Include="Migrations\201212200302231_InitialCreate.Designer.cs">
+      <DependentUpon>201212200302231_InitialCreate.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Advertisement.cs" />
@@ -85,11 +81,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201212182106176_InitialCreate.resx">
-      <DependentUpon>201212182106176_InitialCreate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201212190232492_AddAdvertisement.resx">
-      <DependentUpon>201212190232492_AddAdvertisement.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201212200302231_InitialCreate.resx">
+      <DependentUpon>201212200302231_InitialCreate.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

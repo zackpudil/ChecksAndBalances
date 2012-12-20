@@ -5,13 +5,13 @@ namespace ChecksAndBalances.Data.Migrations
     using System.Data.Entity.Migrations.Infrastructure;
     using System.Resources;
     
-    public sealed partial class AddAdvertisement : IMigrationMetadata
+    public sealed partial class InitialCreate : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(AddAdvertisement));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(InitialCreate));
         
         string IMigrationMetadata.Id
         {
-            get { return "201212190232492_AddAdvertisement"; }
+            get { return "201212200302231_InitialCreate"; }
         }
         
         string IMigrationMetadata.Source

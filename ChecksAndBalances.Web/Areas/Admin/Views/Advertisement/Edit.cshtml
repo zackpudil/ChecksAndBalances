@@ -1,0 +1,113 @@
+﻿@model ChecksAndBalances.Data.Models.Advertisement
+
+@{
+    ViewBag.Title = "Checks & Balances | Admin | Advert";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section header {
+    <style type="text/css">
+        img.small { width: 200px !important; height: 200px !important; }
+        .hover { border: 2px solid yellow !important; }
+    </style>
+}
+
+<section id="content" class="container">
+    <div class="columns twelve">
+        <form>
+            <label for="client-name">Client Name:</label>
+            <input type="text" id="client-name" name="client-name" data-bind="value: ClientName" />
+
+            <label for="link">Click Link:</label>
+            <input type="text" id="link" name="link" data-bind="value: Url" />
+
+            <label for="image">Image: </label>
+            <img id="image" class="small" data-bind="attr: { src: ImageUrl }, draganddrop: ImageUrl" alt="Drag and drop image here" />
+
+            <h5>Articles</h5>
+            <table>
+                <thead><tr><th></th><th></th></tr></thead>
+                <tbody data-bind="foreach: Articles">
+                    <tr>
+                        <td>
+                            <select data-bind="options: $parent.SelectArticles, optionsValue: 'Id', optionsText: 'Title', value: Id, optionsCaption: '<Please Select>'"></select>
+                        </td>
+                        <td data-bind="click: $parent.removeArticle">
+                            <span class="icon-remove"></span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <a href="#" data-bind="click: addArticle" class="button">Add Article</a>
+        </form>
+        <hr class="divider1" />
+
+        <div class="text-center add-top">
+            <a href="#" data-bind="click: save" class="button large">Save</a>
+        </div>
+    </div>
+</section>
+
+@section footer {
+    <script type="text/javascript" src="~/Scripts/knockout-2.2.0.js"></script>
+    <script type="text/javascript" src="~/Scripts/knockout.mapping-latest.js"></script>
+    <script type="text/javascript">
+        (function ($) {
+            ko.bindingHandlers.draganddrop = {
+                init: function (element, params) {
+                    element.ondragover = function () {
+                        $(this).addClass('hover');
+                        return false;
+                    };
+
+                    element.ondrop = function (e) {
+                        $(this).removeClass('hover');
+                        e.preventDefault();
+                        var file = e.dataTransfer.files[0],
+                            reader = new FileReader();
+
+                        reader.onload = function (readerEvent) {
+                            var extension = readerEvent.target.result.match(/data:image\/([a-z]+);base64.*/i)[1];
+
+                            $.post("/Api/Images/", { Id: 0, Image: readerEvent.target.result.replace('data:image/' + extension + ';base64,', '') }, function (data) {
+                                params()('/Api/Images/' + data.Id + '.' + extension);
+                            });
+                        };
+                        reader.readAsDataURL(file);
+
+                        return false;
+                    };
+                }
+            };
+
+            var AdvertisementViewModel = function (model) {
+                var self = ko.mapping.fromJS(model);
+
+                self.SelectArticles = @Helpers.JsonSerialize(ViewBag.Articles, this);
+
+                self.addArticle = function() {
+                    self.Articles.push({ 
+                        Id: 0,
+                        Title: ""
+                    });
+                };
+
+                self.removeArticle = function(article) {
+                    self.Articles.remove(article);
+                };
+
+                self.save = function() {
+                    ko.utils.postJson(
+                        "@Url.RouteUrl("Admin_default", new { @controller = "Advertisement", @action = "Edit" })", 
+                        { advert: ko.mapping.toJS(self) }
+                    );
+                };
+
+                return self;
+            };
+
+            var viewModel = new AdvertisementViewModel(@Helpers.JsonSerialize(Model, this));
+            ko.applyBindings(viewModel);
+        })(jQuery);
+    </script>
+}

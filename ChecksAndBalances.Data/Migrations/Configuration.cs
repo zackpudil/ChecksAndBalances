@@ -10,6 +10,11 @@ namespace ChecksAndBalances.Data.Migrations
         public Configuration()
         {
             AutomaticMigrationsEnabled = true;
+            AutomaticMigrationDataLossAllowed = true;
+        }
+
+        protected override void Seed(ChecksAndBalances.Data.Storage.Context.ChecksAndBalancesContext context)
+        {
         }
     }
 }

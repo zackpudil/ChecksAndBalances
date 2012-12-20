@@ -56,7 +56,7 @@
                                 @Html.RouteLink("edit", "Admin_default", new { @controller = "Article", @action = "Edit", @id = article.Id }, new { @class = "button" })
                             </td>
                             <td>
-                                <a href="#" class="button">delete</a>
+                                <a href="#" class="button red">delete</a>
                             </td>
                         </tr>
                     }
@@ -72,7 +72,6 @@
                     <th>Publish Date</th>
                     <th>States</th>
                     <th>Tags</th>
-                    <th></th>
                     <th></th>
                     <th></th>
                 </tr>
@@ -98,13 +97,10 @@
                             }
                         </td>
                         <td>
-                            <a href="#" class="button">revoke</a>
+                            <a href="#" class="button yellow">revoke</a>
                         </td>
                         <td>
-                            <a href="#" class="button">remove</a>
-                        </td>
-                        <td>
-                            <a href="#" class="button">add ad</a>
+                            <a href="#" class="button red">remove</a>
                         </td>
                     </tr>
                 }

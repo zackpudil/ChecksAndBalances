@@ -58,6 +58,7 @@
   <ItemGroup>
     <Compile Include="Infrastructure\AppStart.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\AdvertisementService.cs" />
     <Compile Include="Services\ArticleService.cs" />
     <Compile Include="Services\CategoryTagService.cs" />
   </ItemGroup>

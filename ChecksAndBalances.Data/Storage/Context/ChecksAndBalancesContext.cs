@@ -23,6 +23,10 @@ namespace ChecksAndBalances.Data.Storage.Context
             modelBuilder.Entity<Article>()
                 .Property(a => a.DatePublished)
                 .HasColumnType("datetime2");
+
+            modelBuilder.Entity<Advertisement>()
+                .Property(a => a.DateCreated)
+                .HasColumnType("datetime2");
         }
     }
 }
