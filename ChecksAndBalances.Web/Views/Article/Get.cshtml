@@ -9,12 +9,18 @@
 @section header {
     <style type="text/css">
         img.large { max-height: 300px !important; }
+        img.advert { height: 100px; width: 100%;}
     </style>
 }
 
 @section sectionTitle {
     <section class="section-title">
-
+        @if(@Model.Advertisement != null)
+        {
+            <a href="@Model.Advertisement.Url">
+                <img class="advert" src="@Model.Advertisement.ImageUrl" />
+            </a>
+        }
     </section>
 }
 

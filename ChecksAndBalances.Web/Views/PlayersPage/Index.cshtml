@@ -80,7 +80,16 @@
 
                 @Html.ActionLink("READ MORE...", "Get", "Article", new { @state = Model.CurrentState, @resource = article.Title.ToUrlSafeString() }, new { @class = "post-more" })
             </div>
-            
+
+            <hr class="devider1" />
+
+            if(article.Advertisement != null)
+            {
+                <a href="@article.Advertisement.Url">
+                    <img width="500" height="50" src="@article.Advertisement.ImageUrl" alt="advertisement" />
+                </a>
+            }
+
             <hr class="devider1" />
         }
         

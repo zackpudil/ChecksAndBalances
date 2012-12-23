@@ -30,10 +30,12 @@
                 <tbody data-bind="foreach: Articles">
                     <tr>
                         <td>
-                            <select data-bind="options: $parent.SelectArticles, optionsValue: 'Id', optionsText: 'Title', value: Id, optionsCaption: '<Please Select>'"></select>
+                            <select data-bind="options: $parent.SelectArticles, optionsValue: 'Value', optionsText: 'Text', value: Id, optionsCaption: '<Please Select>'"></select>
                         </td>
-                        <td data-bind="click: $parent.removeArticle">
-                            <span class="icon-remove"></span>
+                        <td> 
+                            <a href="#" data-bind="click: $parent.removeArticle">
+                                <span class="icon-remove"></span>
+                            </a>
                         </td>
                     </tr>
                 </tbody>
@@ -79,6 +81,7 @@
                     };
                 }
             };
+
 
             var AdvertisementViewModel = function (model) {
                 var self = ko.mapping.fromJS(model);

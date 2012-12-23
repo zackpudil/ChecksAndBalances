@@ -15,6 +15,8 @@ namespace ChecksAndBalances.Service.Services
 
         void Save(Advertisement advert);
         void UpdateSortOrder(IEnumerable<Advertisement> adverts);
+
+        void Delete(int id);
     }
 
     public class AdvertisementService : IAdvertisementService
@@ -56,6 +58,15 @@ namespace ChecksAndBalances.Service.Services
         public void UpdateSortOrder(IEnumerable<Advertisement> adverts)
         {
             _session.Update<Advertisement>(adverts);
+        }
+
+        public void Delete(int id)
+        {
+            var advertisement = _session.Single<Advertisement>(x => x.Id == id);
+            advertisement.Articles.ToList().ForEach(x => x.Advertisement = null);
+            _session.Delete<Advertisement>(advertisement);
+
+            _session.CommitChanges();
         }
     }
 }

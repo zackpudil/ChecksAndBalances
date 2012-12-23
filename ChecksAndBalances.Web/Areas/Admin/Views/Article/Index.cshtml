@@ -16,13 +16,10 @@
 
 <section id="content" class="container add-top add-bottom">
     <div class="columns twelve">
-        <h4>Articles waiting to be published</h4>
-        @if (!Model.UnPublishedArticles.Any())
+
+        @if (Model.UnPublishedArticles.Any())
         {
-            <h4>No Articles to edit</h4>
-        }
-        else
-        {
+            <h4>Articles waiting to be published</h4>
             <table class="table table-striped">
                 <thead>
                     <tr>
@@ -56,7 +53,7 @@
                                 @Html.RouteLink("edit", "Admin_default", new { @controller = "Article", @action = "Edit", @id = article.Id }, new { @class = "button" })
                             </td>
                             <td>
-                                <a href="#" class="button red">delete</a>
+                                @Html.RouteLink("delete", "Admin_default", new { @controller = "Article", @action = "Delete", @id = article.Id }, new  { @class = "button red" })
                             </td>
                         </tr>
                     }
@@ -72,7 +69,6 @@
                     <th>Publish Date</th>
                     <th>States</th>
                     <th>Tags</th>
-                    <th></th>
                     <th></th>
                 </tr>
             </thead>
@@ -97,10 +93,7 @@
                             }
                         </td>
                         <td>
-                            <a href="#" class="button yellow">revoke</a>
-                        </td>
-                        <td>
-                            <a href="#" class="button red">remove</a>
+                            @Html.RouteLink("revoke", "Admin_default", new { @controller = "Article", @action = "Revoke", @id = article.Id }, new { @class = "button yellow" })
                         </td>
                     </tr>
                 }

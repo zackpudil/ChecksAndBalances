@@ -15,7 +15,7 @@ namespace ChecksAndBalances.Web.Areas.Admin.Controllers
     public class ArticleController : Controller
     {
        IArticleService _service;
-        ICategoryTagService _tagService;
+       ICategoryTagService _tagService;
 
         public ArticleController(IArticleService service, ICategoryTagService tagService)
         {
@@ -83,6 +83,18 @@ namespace ChecksAndBalances.Web.Areas.Admin.Controllers
 
             var url = Url.RouteUrl("Default", new { controller = "Article", action = "Get", state = article.States.First().State, resource = article.Title.ToUrlSafeString() });
             return Redirect(url);
+        }
+
+        public ActionResult Delete(int id)
+        {
+            _service.Delete(id);
+            return RedirectToAction("Index");
+        }
+
+        public ActionResult Revoke(int id)
+        {
+            _service.Revoke(id);
+            return RedirectToAction("Index");
         }
 
     }

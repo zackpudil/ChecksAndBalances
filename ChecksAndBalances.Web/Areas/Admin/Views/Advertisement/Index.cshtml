@@ -29,13 +29,14 @@
                         <th>Link</th>
                         <th>Articles</th>
                         <th></th>
+                        <th></th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody id="sortable">
                     @foreach (var advert in Model)
                     {
                         <tr>
-                            <td>@advert.SortOrder</td>
+                            <td class="sortorder">@advert.SortOrder</td>
                             <td>@advert.ClientName</td>
                             <td>
                                 <img width="50" src="@advert.ImageUrl" />
@@ -57,7 +58,10 @@
                                 }
                             </td>
                             <td>
-                                <a href="#" class="button red">Delete</a>
+                                @Html.RouteLink("edit", "Admin_default", new { @controller = "Advertisement", @action = "Edit", @id = advert.Id }, new { @class = "button" })
+                            </td>
+                            <td>
+                                @Html.RouteLink("delete", "Admin_default", new { @controller = "Advertisement", @action = "Delete", @id = advert.Id}, new { @class = "button red" })
                             </td>
                         </tr>
                     }
@@ -72,3 +76,31 @@
         </div>
     </div>
 </section>
+
+@section footer {
+    <script src="~/Scripts/jquery.ui.core.min.js"></script>
+    <script src="~/Scripts/jquery.ui.mouse.min.js"></script>
+    <script type="text/javascript" src="~/Scripts/jquery.ui.sortable.js"></script>
+
+    <script type="text/javascript">
+        (function ($) {
+            $(function () {
+                $('#sortable').sortable({
+                    update: function (event, ui) {
+                        reOrder();
+                    }
+                });
+
+                var reOrder = function () {
+                    var $trs = $('#sortable > tr');
+                    $trs.each(function (idx, el) {
+                        $(el).find('td.sortorder').html(idx+1);
+                    });
+                };
+
+                reOrder();
+            });
+        })(jQuery);
+    </script>
+} 
+

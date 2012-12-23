@@ -33,15 +33,28 @@ namespace ChecksAndBalances.Web.Areas.Admin.Controllers
                 ? _service.GetAdvertisement(id.GetValueOrDefault())
                 : new Advertisement();
 
-            ViewBag.Articles = _articleService.GetArticles().ToList();
+            ViewBag.Articles = _articleService.GetArticles().ToList().Select(x =>
+                new SelectListItem
+                {
+                    Text = x.Title,
+                    Value = x.Id.ToString()
+                }
+            );
 
             return View(advertisement);
         }
 
         [HttpPost]
+        [ValidateInput(false)]
         public ActionResult Edit([FromJson]Advertisement advert)
         {
             _service.Save(advert);
+            return RedirectToAction("Index");
+        }
+
+        public ActionResult Delete(int id)
+        {
+            _service.Delete(id);
             return RedirectToAction("Index");
         }
     }

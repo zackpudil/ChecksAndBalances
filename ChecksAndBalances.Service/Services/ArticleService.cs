@@ -25,6 +25,9 @@ namespace ChecksAndBalances.Service.Services
 
         ArticleInProgress SaveArticle(ArticleInProgress article);
         Article PublishArticle(Article article);
+
+        void Delete(int id);
+        void Revoke(int id);
     }
 
     class ArticleService : IArticleService
@@ -131,5 +134,28 @@ namespace ChecksAndBalances.Service.Services
                 .Where(x => x.States.Any(y => y.StateId == (int)state));
         }
 
+        public void Delete(int id)
+        {
+            _session.Delete<ArticleInProgress>(x => x.Id == id);
+            _session.CommitChanges();
+        }
+
+        public void Revoke(int id)
+        {
+            var article = _session.Single<Article>(x => x.Id == id);
+
+            var articleInProgress = new ArticleInProgress
+            {
+                SavedContent = JsonConvert.SerializeObject(article, Formatting.None, new JsonSerializerSettings
+                {
+                    ReferenceLoopHandling = ReferenceLoopHandling.Serialize,
+                    PreserveReferencesHandling = PreserveReferencesHandling.Objects
+                })
+            };
+
+            _session.Add<ArticleInProgress>(articleInProgress);
+            _session.Delete<Article>(article);
+            _session.CommitChanges();
+        }
     }
 }
