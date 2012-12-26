@@ -34,10 +34,7 @@
   =============================================== -->
     <script type="text/javascript" src="~/Scripts/modernizr.js"></script>
 
-    @if (IsSectionDefined("header"))
-    {
-        @RenderSection("header")
-    }
+    @RenderSection("header", required: false)
 
     <style type="text/css">
         #candb-logo a {
@@ -95,7 +92,7 @@
                                         <a href="javascript:void(0);" class="@(ViewBag.Title.Contains("Home") ? "active" : "")">Home</a>
                                         <ul>
                                             <li>@Html.RouteLink("Home", "Default", new { @controller = "Home", @action = "Index" })</li>
-                                            <li>@Html.RouteLink("Choose State", "Default", new { @controller = "Home", @action = "Index" })</li>
+                                            <li>@Html.RouteLink("Choose State", "Default", new { @controller = "Home", @action = "ChooseState" })</li>
                                         </ul>
                                     </li>
 
@@ -134,19 +131,28 @@
                                         <a href="javascript:void(0);" 
                                             class="@(ViewBag.Title.Contains("Account") ? "active" : "")">Account</a>
                                         <ul>
-                                            <li>@Html.RouteLink("Settings", "Default", new { @controller = "Home", @action = "Index" })</li>
-                                            <li>@Html.RouteLink("Sign In", "Default", new { @controller = "Home", @action = "Index" })</li>
-                                            <li>@Html.RouteLink("Sign Up", "Default", new { @controller = "Home", @action = "Index" })</li>
+                                            @if(Request.IsAuthenticated)
+                                            {
+                                                <li>@Html.RouteLink("Settings", "Default", new { @controller = "Account", @action = "Manage" })</li>
+                                                <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
+                                            }
+                                            else
+                                            {
+                                                <li>@Html.RouteLink("Sign In", "Default", new { @controller = "Account", @action = "Login" })</li>
+                                                <li>@Html.RouteLink("Sign Up", "Default", new { @controller = "Account", @action = "Register" })</li>
+                                            }
                                         </ul>
                                     </li>
-                                    <li>
-                                        <a href="javascript:void(0);"
-                                            class="@(ViewBag.Title.Contains("Admin") ? "active" : "")">Admin</a>
-                                        <ul>
-                                            <li>@Html.RouteLink("Article Management", "Admin_default", new { @controller = "Article", @action="Index" }, new { })
-                                            <li>@Html.RouteLink("Ad Management", "Admin_default", new { @controller = "Advertisement", @action = "Index" }, new { })
-                                        </ul>
-                                    </li>
+                                    @if(User.IsInRole("Administrator")) {
+                                        <li>
+                                            <a href="javascript:void(0);"
+                                                class="@(ViewBag.Title.Contains("Admin") ? "active" : "")">Admin</a>
+                                            <ul>
+                                                <li>@Html.RouteLink("Article Management", "Admin_default", new { @controller = "Article", @action="Index" }, new { })
+                                                <li>@Html.RouteLink("Ad Management", "Admin_default", new { @controller = "Advertisement", @action = "Index" }, new { })
+                                            </ul>
+                                        </li>
+                                    }
                                 </ul>
 
                                 <!--  Search Bar -->
@@ -169,15 +175,16 @@
             </header>
             <!-- End Header -->
             <div class="header-filler"></div>
-
-            @if (IsSectionDefined("sectionTitle"))
-            {
-                @RenderSection("sectionTitle")
-            }
+            @RenderSection("sectionTitle", required: false)
         </div>
         <!-- End Header Wrapper -->
 
         @RenderBody()
+
+        @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { @id = "logoutForm" }))
+        {
+            @Html.AntiForgeryToken()
+        }
 
         <!-- Start Footer -->
         <footer id="footer">
@@ -266,9 +273,6 @@
     <script type="text/javascript" src="~/Scripts/jquery.gmap.min.js"></script>
     <script type="text/javascript" src="~/Scripts/omnibiz-custom.js"></script>
 
-    @if (IsSectionDefined("footer"))
-    {
-        @RenderSection("footer")
-    }
+    @RenderSection("footer", required: false)
 </body>
 </html>

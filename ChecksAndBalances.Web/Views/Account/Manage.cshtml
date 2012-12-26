@@ -1,0 +1,26 @@
+﻿@model ChecksAndBalances.Web.Models.LocalPasswordModel
+@{
+    ViewBag.Title = "Checks & Balances | Account | Settings";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section sectionTitle {
+    <section class="section-title">
+        <h1>Account Settings</h1>
+    </section>
+}
+
+<section id="content" class="container">
+    <p class="message-success">@ViewBag.StatusMessage</p>
+
+    <p>You're logged in as <strong>@User.Identity.Name</strong>.</p>
+
+    @if (ViewBag.HasLocalPassword)
+    {
+        @Html.Partial("_ChangePasswordPartial")
+    }
+    else
+    { 
+        @Html.Partial("_SetPasswordPartial")
+    }
+</section>

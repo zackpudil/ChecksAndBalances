@@ -12,6 +12,7 @@ using Newtonsoft.Json;
 
 namespace ChecksAndBalances.Web.Areas.Admin.Controllers
 {
+    [Authorize(Roles="Administrator")]
     public class ArticleController : Controller
     {
        IArticleService _service;

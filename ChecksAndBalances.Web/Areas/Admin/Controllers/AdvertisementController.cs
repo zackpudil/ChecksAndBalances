@@ -9,6 +9,7 @@ using ChecksAndBalances.Web.Attributes;
 
 namespace ChecksAndBalances.Web.Areas.Admin.Controllers
 {
+    [Authorize(Roles="Administrator")]
     public class AdvertisementController : Controller
     {
         private IAdvertisementService _service;

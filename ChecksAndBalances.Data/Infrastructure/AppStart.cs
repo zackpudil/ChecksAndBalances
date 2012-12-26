@@ -8,6 +8,8 @@ using Ninject.Infrastructure;
 using Ninject.Extensions.Conventions;
 using System.Data.Entity;
 using ChecksAndBalances.Data.Storage.Context;
+using ChecksAndBalances.Data.Storage.Context.SimpleMembership;
+using System.Threading;
 
 namespace ChecksAndBalances.Data.Infrastructure
 {

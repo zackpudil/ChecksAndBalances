@@ -10,16 +10,21 @@ using ChecksAndBalances.Data.Storage;
 
 namespace ChecksAndBalances.Data.Models
 {
-    public class ArticleState : IEntity
+    public class UserProfile : IEntity
     {
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
+
+        public string UserName { get; set; }
+        public string Email { get; set; }
+
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+
         public int StateId { get; set; }
 
-        public virtual Article Article { get; set; }
-
         [NotMapped]
-        public State State
+        public State State 
         {
             get { return (State)StateId; }
             set { StateId = (int)value; }

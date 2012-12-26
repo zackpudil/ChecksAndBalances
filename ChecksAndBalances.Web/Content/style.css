@@ -71,6 +71,14 @@
 @import url(plugins.css);     /* Plugins Stylesheet */ 
 @import url(icon.css);        /* Icons Stylesheet */
 
+input.input-validation-error {
+    border: 1px solid #e80c4d;
+}
+
+input[type="checkbox"].input-validation-error {
+    border: 0 none;
+}
+
 /* =============================================== */
 /* 01 Layout Structure
 ================================================== */

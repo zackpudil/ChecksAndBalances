@@ -23,6 +23,7 @@ namespace ChecksAndBalances.Web.Controllers
         //
         // GET: /PlayersPage/
 
+        [Authorize]
         public ActionResult Index(State state)
         {
             var viewModel = new PlayersPageViewModel 

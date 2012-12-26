@@ -24,7 +24,7 @@
             sortList: "asc",
             onClick: function (e) {
                 $("#SelectedState").find('option[value="' + e.key + '"]').attr('selected', true);
-                $('form').submit();
+                $('#stateForm').submit();
             },
             showToolTip: false,
         };

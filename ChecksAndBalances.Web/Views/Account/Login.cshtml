@@ -1,0 +1,44 @@
+﻿@model ChecksAndBalances.Web.Models.LoginModel
+
+@{
+    ViewBag.Title = "Checks & Balances | Account | Log in";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section sectionTitle {
+    <section class="section-title">
+        <h1>Log in</h1>
+    </section>
+}
+
+<section id="content" class="container">
+    <h2>Use a local account to log in.</h2>
+    @using (Html.BeginForm(new { ReturnUrl = ViewBag.ReturnUrl })) {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true, "", new { @class = "info-box red" })
+
+        <fieldset>
+            <legend>Log in Form</legend>
+            <ul>
+                <li>
+                    @Html.LabelFor(m => m.UserName)
+                    @Html.TextBoxFor(m => m.UserName)
+                    @Html.ValidationMessageFor(m => m.UserName)
+                </li>
+                <li>
+                    @Html.LabelFor(m => m.Password)
+                    @Html.PasswordFor(m => m.Password)
+                    @Html.ValidationMessageFor(m => m.Password)
+                </li>
+                <li>
+                    @Html.CheckBoxFor(m => m.RememberMe)
+                    @Html.LabelFor(m => m.RememberMe, new { @class = "checkbox" })
+                </li>
+            </ul>
+            <input type="submit" value="Log in" />
+        </fieldset>
+        <p>
+            @Html.ActionLink("Register", "Register") if you don't have an account.
+        </p>
+    }
+</section>

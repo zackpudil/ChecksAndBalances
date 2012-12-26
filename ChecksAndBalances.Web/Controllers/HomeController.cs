@@ -27,6 +27,12 @@ namespace ChecksAndBalances.Web.Controllers
 
         public ActionResult Index()
         {
+            return View(_service.GetArticles().OrderByDescending(x => x.DatePublished).Skip(0).Take(5));
+        }
+
+        [Authorize]
+        public ActionResult ChooseState()
+        {
             var viewModel = new HomeViewModel
             {
                 States = _service.GetStates().Select(x => new SelectListItem {
@@ -38,7 +44,8 @@ namespace ChecksAndBalances.Web.Controllers
         }
 
         [HttpPost]
-        public ActionResult Index(HomeViewModel viewModel)
+        [Authorize]
+        public ActionResult ChooseState(HomeViewModel viewModel)
         {
             return this.RedirectToRoute("Default", new { controller = "PlayersPage", action = "Index", state = viewModel.SelectedState });
         }
