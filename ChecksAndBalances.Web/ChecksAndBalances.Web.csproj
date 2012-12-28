@@ -170,6 +170,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Services\PayPalService.cs" />
     <Compile Include="App_Start\NinjectWebCommon.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\AdvertisementController.cs" />

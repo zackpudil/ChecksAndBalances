@@ -6,10 +6,11 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
 using ChecksAndBalances.Web.Models;
+using ChecksAndBalances.Web.Services;
 using Microsoft.Web.WebPages.OAuth;
 using WebMatrix.WebData;
 
-namespace MvcApplication1.Controllers
+namespace ChecksAndBalances.Web.Controllers
 {
     [Authorize]
     public class AccountController : Controller
@@ -197,6 +198,17 @@ namespace MvcApplication1.Controllers
 
             // If we got this far, something failed, redisplay form
             return View(model);
+        }
+
+        [Authorize]
+        public ActionResult Buy()
+        {
+            var redirect = PayPal.ExpressCheckout(new PayPalOrder { Amount = 1 });
+            Session["token"] = redirect.Token;
+
+            Roles.AddUserToRole(User.Identity.Name, "Buyer");
+
+            return Redirect(redirect.Url);
         }
 
         #region Helpers

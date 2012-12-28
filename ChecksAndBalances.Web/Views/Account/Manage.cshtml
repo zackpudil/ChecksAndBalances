@@ -23,4 +23,14 @@
     { 
         @Html.Partial("_SetPasswordPartial")
     }
+
+    @if (!User.IsInRole("Buyer"))
+    {
+        using (Html.BeginForm("Buy", "Account"))
+        {
+           <p>Upgrade to premium account for access to Archive:</p>
+           <input type='image' name='submit'
+              src='https://www.paypal.com/en_US/i/btn/btn_xpressCheckout.gif' />
+        }
+    }
 </section>
