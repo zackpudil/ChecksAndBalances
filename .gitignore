@@ -13,3 +13,6 @@ deploy/*
 *.bak
 packages/
 msbuild.log
+
+# databases
+App_Data/

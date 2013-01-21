@@ -40,7 +40,7 @@
         #candb-logo a {
             line-height: 2;
             font-weight: 900;
-            font-size: 24px;
+            font-size: 22px;
             color: black;
             font-family: Lato, Helvetica, Arial, sans-serif;
         }
@@ -175,9 +175,12 @@
             </header>
             <!-- End Header -->
             <div class="header-filler"></div>
-            @RenderSection("sectionTitle", required: false)
         </div>
         <!-- End Header Wrapper -->
+
+        <div class="row">
+            @RenderSection("sectionTitle", required: false)
+        </div>
 
         @RenderBody()
 

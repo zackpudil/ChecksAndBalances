@@ -165,7 +165,7 @@ body.background2 {
   z-index: 1;
 }
 .header-alt2 .header-filler {
-  padding-top: 150px;
+  padding-top: 122px;
   display: block;
   height: 0;
 }
@@ -2781,19 +2781,6 @@ hr.divider2 {
 .section-title {
   padding-bottom: 12px; 
   position: relative;
-}
-#header:after, .section-title:after {
-    background: none;      
-    text-align: center;      
-    position: absolute;     
-    content: '';      
-    left: 0;      
-    bottom: 0;      
-    width: 100%;      
-    z-index: 0;      
-    -webkit-box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.1);      
-    -moz-box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.1);      
-    box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.1);
 }
   .soon #header:after {
     content: none;
