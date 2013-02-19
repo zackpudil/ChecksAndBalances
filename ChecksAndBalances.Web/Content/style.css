@@ -2787,8 +2787,10 @@ hr.divider2 {
   }
 .section-title h1 {
   line-height: 1;
-  font-size: 32px;
-  margin-bottom: 10px;
+  font-size: 24px;
+  font-family: Menlo, Monaco, Consolas, "Lucida Console", "Courier New", Courier, monospace;
+  margin: 10px 0px 10px 0px;
+  padding: 0 35px;
 }
 .section-title h1 span {
   color: #49abcf;
