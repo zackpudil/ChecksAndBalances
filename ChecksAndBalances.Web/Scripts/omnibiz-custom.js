@@ -983,19 +983,19 @@ jQuery(document).ready(function($){
   // 20 Tweetable
   if ($('#tweets').length && jQuery()) {
     $('#tweets').tweetable({
-      limit: 10,                       // Number of tweets to show
-      username: 'philemn',             // @username tweets to display
+      limit: 10,                      // Number of tweets to show
+      username: 'checksnbalances',    // @username tweets to display
       time: true,                     // Display date
-      rotate: true,                  // Rotate tweets
+      rotate: true,                   // Rotate tweets
       speed: 5000,                    // Speed of rotation
-      replies: false,                  // Filter out @replys
+      replies: false,                 // Filter out @replys
       position: 'append',             // Append position
       failed: "No tweets available",  // Twitter stream unavailable text
       html5: true,                    // HTML5 Support
       retweets: true,                 // Show retweets
       onComplete: function($ul) {     // On complete callback
         $('time').timeago();
-      }    
+      }
     }); 
   }  
 
