@@ -28,7 +28,7 @@ namespace ChecksAndBalances.Data.Storage.Context.SimpleMembership
                         }
                     }
 
-                    WebSecurity.InitializeDatabaseConnection("SimpleMembershipContext", "UserProfiles", "Id", "UserName", autoCreateTables: true);
+                    WebSecurity.InitializeDatabaseConnection("ChecksAndBalances", "UserProfiles", "Id", "UserName", autoCreateTables: true);
                 }
                 catch (Exception ex)
                 {
@@ -44,14 +44,14 @@ namespace ChecksAndBalances.Data.Storage.Context.SimpleMembership
                 if (!Roles.RoleExists("Player"))
                     Roles.CreateRole("Player");
 
-                if (!WebSecurity.UserExists("CandBAdmin"))
+                if (!WebSecurity.UserExists("admin"))
                     WebSecurity.CreateUserAndAccount(
-                        "CandBAdmin",
-                        "C&BPassword@1",
-                        new { Email = "zack.pudil@gmail.com", FirstName = "C & B", LastName = "Admin", StateId = (int)State.DC });
+                        "admin",
+                        "password4C&B",
+                        new { Email = "checksandbalances.com@gmail.com", FirstName = "Shawn", LastName = "Towle", StateId = (int)State.DC });
 
-                if (!Roles.GetRolesForUser("CandBAdmin").Contains("Administrator"))
-                    Roles.AddUsersToRoles(new[] { "CandBAdmin" }, new[] { "Administrator" });
+                if (!Roles.GetRolesForUser("admin").Contains("Administrator"))
+                    Roles.AddUsersToRoles(new[] { "admin" }, new[] { "Administrator" });
             }
     }
 }

@@ -8,7 +8,13 @@ using ChecksAndBalances.Data.Models;
 
 namespace ChecksAndBalances.Data.Storage.Context
 {
-    public class SimpleMembershipContext : DbContext    {
+    public class SimpleMembershipContext : DbContext
+    {
         public DbSet<UserProfile> UserProfiles { get; set; }
+
+        public SimpleMembershipContext()
+            : base("ChecksAndBalances")
+        {
+        }
     }
 }

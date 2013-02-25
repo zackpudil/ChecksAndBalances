@@ -40,7 +40,7 @@
         #candb-logo a {
             line-height: 2;
             font-weight: 900;
-            font-size: 24px;
+            font-size: 22px;
             color: black;
             font-family: Lato, Helvetica, Arial, sans-serif;
         }
@@ -71,9 +71,9 @@
                             <a href="#">Checks & <span class="gold">Balances</span></a>
                         </div>
                         <div class="social">
-                            <a href="#" class="social-icons-mini dark color twitter tooltips" title="Twitter">Twitter</a>
-                            <a href="#" class="social-icons-mini dark color facebook tooltips" title="Facebook">Facebook</a>
-                            <a href="#" class="social-icons-mini dark color rss tooltips" title="RSS Feed">RSS Feed</a>
+                            <a href="https://twitter.com/checksnbalances" class="social-icons-mini dark color twitter tooltips" title="Twitter">Twitter</a>
+                            @*<a href="#" class="social-icons-mini dark color facebook tooltips" title="Facebook">Facebook</a>*@
+                            @*<a href="#" class="social-icons-mini dark color rss tooltips" title="RSS Feed">RSS Feed</a>*@
                         </div>
                     </div>
 
@@ -97,7 +97,7 @@
                                     </li>
 
                                     <li>
-                                        @Html.RouteLink("Players", "Default", 
+                                        @Html.RouteLink("Players Page", "Default", 
                                             new 
                                             { 
                                                 @controller = "PlayersPage", 
@@ -156,9 +156,9 @@
                                 </ul>
 
                                 <!--  Search Bar -->
-                                <form action="#" class="nav-search">
+                                @*<form action="#" class="nav-search">
                                     <input type="text">
-                                </form>
+                                </form>*@
 
                             </nav>
                             <!-- End Main Navigation -->
@@ -175,9 +175,12 @@
             </header>
             <!-- End Header -->
             <div class="header-filler"></div>
-            @RenderSection("sectionTitle", required: false)
         </div>
         <!-- End Header Wrapper -->
+
+        <div class="row">
+            @RenderSection("sectionTitle", required: false)
+        </div>
 
         @RenderBody()
 
@@ -197,12 +200,10 @@
                     <div class="columns one-third first">
                         <h4>About Us</h4>
                         <div class="widget-content">
-                            <p>Mollis malesuada primis in faucibus luctus. Ligula eget dolor.</p>
 
                             <ul class="widget-contact-info">
-                                <li class="address">Address: 12th Bvd. Los Angeles, CA, 94101</li>
-                                <li class="phone">Phone: +1 800 123 4567</li>
-                                <li class="mail">E-mail: testmail@sitename.com</li>
+                                <li class="phone">Phone: 651 270 7275</li>
+                                <li class="mail">E-mail: mn.editor@checksandbalances.com</li>
                             </ul>
 
                         </div>
@@ -211,7 +212,7 @@
 
                     <!-- Start Footer Widget Item -->
                     <div class="columns one-third">
-                        <h4>Our Location</h4>
+                        <h4>&nbsp;</h4>
                         <div class="widget-content">
                             <img src="/Content/Images/world-map-bg.png" alt="World Location">
                         </div>
@@ -237,7 +238,7 @@
             <div class="container">
 
                 <p class="align-center">
-                    &copy; Copyright 2012.          
+                    &copy; Copyright @DateTime.Today.Year
                 </p>
 
             </div>
