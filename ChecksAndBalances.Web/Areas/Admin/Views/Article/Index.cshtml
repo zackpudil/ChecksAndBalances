@@ -36,18 +36,10 @@
                         <tr>
                             <td>@article.Title</td>
                             <td>
-                                @foreach (var state in article.States)
-                                {
-                                    <span>@state.State.ToDescription()</span>
-                                    <span>,</span>
-                                }
+                                @string.Join(", ", article.States.Select(x => x.State.ToDescription()))
                             </td>
                             <td>
-                                @foreach (var tag in article.Tags)
-                                {
-                                    <span>@tag.Name</span>
-                                    <span>,</span>
-                                }
+                                @string.Join(", ", article.Tags.Select(x => x.Name))
                             </td>
                             <td>
                                 @Html.RouteLink("edit", "Admin_default", new { @controller = "Article", @action = "Edit", @id = article.Id }, new { @class = "button" })
@@ -79,21 +71,14 @@
                         <td>@article.Title</td>
                         <td>@article.DatePublished.ToShortDateString()</td>
                         <td>
-                            @foreach (var state in article.States)
-                            {
-                                <span>@state.State.ToDescription()</span>
-                                <span>,</span>
-                            }
+                            @string.Join(", ", article.States.Select(x => x.State.ToDescription()))
                         </td>
                         <td>
-                            @foreach (var tag in article.Tags)
-                            {
-                                <span>@tag.Name</span>
-                                <span>,</span>
-                            }
+                            @string.Join(", ", article.Tags.Select(x => x.Name))
                         </td>
                         <td>
-                            @Html.RouteLink("revoke", "Admin_default", new { @controller = "Article", @action = "Revoke", @id = article.Id }, new { @class = "button yellow" })
+                            @Html.RouteLink("Edit", "Admin_default", new { @controller = "Article", @action = "Edit", @id = article.Id }, new { @class = "button" })
+                            @Html.RouteLink("Revoke", "Admin_default", new { @controller = "Article", @action = "Revoke", @id = article.Id }, new { @class = "button yellow" })
                         </td>
                     </tr>
                 }
