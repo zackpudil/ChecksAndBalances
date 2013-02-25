@@ -18,6 +18,11 @@ namespace ChecksAndBalances.Data.Storage.Context
         public DbSet<ArticleImage> ArticleImages { get; set; }
         public DbSet<Advertisement> Advertisements { get; set; }
 
+        public ChecksAndBalancesContext()
+            : base("ChecksAndBalances")
+        {
+        }
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Article>()
