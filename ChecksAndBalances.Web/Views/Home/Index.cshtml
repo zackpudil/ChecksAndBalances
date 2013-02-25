@@ -17,7 +17,7 @@
 @section sectionTitle {
     <section class="section-title">
         <div class="container">
-            @if(Model.Any())
+            @if (Model.Any() && Model.First().Advertisement != null)
             {
                 <a href="@Model.First().Advertisement.Url">
                     <img height="100" width="940" src="@Model.First().Advertisement.ImageUrl" />
